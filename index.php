@@ -1,6 +1,5 @@
 <?php
   session_start();
-  # Test commit from lab computers
   function editCharacter($id, $nm, $a, $g, $rc, $cl, $lvl) {
     echo <<<_END
       <div class="homes">
