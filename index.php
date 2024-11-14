@@ -313,9 +313,15 @@
   <fieldset id="roster">
     <legend>Character Roster</legend>
     <?php
-      $query  = "SELECT * FROM char_sheets";
-      $result = $pdo->query($query);
-      $count = 0;
+      if(isset($_POST['search']) && !empty($_POST['search'])) {
+        $search = $pdo->quote("%".$_POST['search']."%");
+        $query  = "SELECT * FROM char_sheets WHERE cname like $search";
+        $result = $pdo->query($query);
+
+      } else {
+        $query  = "SELECT * FROM char_sheets";
+        $result = $pdo->query($query);
+      }
       while ($row = $result->fetch()) {
         $id = htmlspecialchars($row['id']);
         $r0 = htmlspecialchars($row['cname']);
@@ -324,8 +330,6 @@
         $r3 = htmlspecialchars($row['race']);
         $r4 = htmlspecialchars($row['class']);
         $r5 = htmlspecialchars($row['level']);
-        $count += 1;
-
         if((isset($_SESSION['edit']) && isset($_POST['edit'])) && ($_SESSION['edit'] && $_POST['edit'] === $id)) { 
           editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5);
         } else {
