@@ -1,5 +1,6 @@
 <?php
   session_start();
+  # Testing lab computer can change repo
   function editCharacter($id, $nm, $a, $g, $rc, $cl, $lvl) {
     echo <<<_END
       <div class="homes">
