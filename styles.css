@@ -40,7 +40,7 @@ h1, h2 {
     margin-bottom: 20px;
 }
 .border {
-    display: inline-block;
+    display: inline-flex;
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
@@ -49,8 +49,10 @@ h1, h2 {
 
   /* Navbar container */
 .navbar {
+    width: inherit;
     overflow: hidden;
     font-family: Arial;
+    justify-content: end;
 }
 
 /* Navbar links */
@@ -78,7 +80,11 @@ h1, h2 {
     background-color:lavender
 }
 .searchbar {
-    float: left;
+    width: inherit;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
 }
 .homes {
     background-color: navajowhite;
