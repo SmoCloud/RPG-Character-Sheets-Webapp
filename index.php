@@ -133,15 +133,22 @@
   }
 
   if (isset($_POST['delete']) && isset($_POST['cname'])) {
-    $cname   = $pdo->quote($_POST['cname']);
-    $query  = "DELETE FROM char_sheets WHERE cname=$cname";
+    $cname  = $pdo->quote($_POST['cname']);
+    $seed   = $pdo->quote($_POST['delete']);
+    $query  = "DELETE char_sheets FROM char_sheets JOIN users ON char_sheets.uid=users.id WHERE cname=$cname";
     $result = $pdo->query($query);
+    $reseed = "DBCC CHECKIDENT (char_sheets, RESEED, $seed)";
+    $pdo->query($reseed);
+
   }
   elseif(isset($_POST['edit'])) {
     $_SESSION['edit'] = true;
   }
   elseif(isset($_POST['update'])) {
+    $user_id = $_SESSION['user_id'];
     session_unset();
+    $_SESSION['user_id'] = $user_id;
+    // unset($_POST['edit']);
     if (isset($_POST['cname']) &&
       isset($_POST['age']) &&
       isset($_POST['gender']) &&
@@ -151,13 +158,15 @@
       isset($_POST['edit-id'])) {
       $cname    = $pdo->quote($_POST['cname']);
       $age      = $pdo->quote($_POST['age']);
+      $user_id  = $pdo->quote($_SESSION['user_id']);
       $gender   = $pdo->quote($_POST['gender']);
       $race     = $pdo->quote($_POST['race']);
       $class    = $pdo->quote($_POST['char-class']);
       $level    = $pdo->quote($_POST['level']);
       $id       = $pdo->quote($_POST['edit-id']);
       
-      $query    = "UPDATE char_sheets SET cname = $cname, age = $age, gender=$gender, race=$race, class=$class, level=$level WHERE id=$id";
+      $query    = "UPDATE char_sheets SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level 
+                  FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE cid=$id AND uid=$user_id";
       $result = $pdo->query($query);
     }
   }
@@ -169,13 +178,14 @@
       isset($_POST['char-class']) && 
       isset($_POST['level'])) {
     $cname    = $pdo->quote($_POST['cname']);
+    $user_id  = $pdo->quote($_SESSION['user_id']);
     $age      = $pdo->quote($_POST['age']);
     $gender   = $pdo->quote($_POST['gender']);
     $race     = $pdo->quote($_POST['race']);
     $class    = $pdo->quote($_POST['char-class']);
     $level    = $pdo->quote($_POST['level']);
     
-    $query    = "INSERT INTO char_sheets (cname, age, gender, race, class, level) VALUES ($cname, $age, $gender, $race, $class, $level)";
+    $query    = "INSERT INTO char_sheets (cname, uid, age, gender, race, class, level) VALUES ($cname, $user_id, $age, $gender, $race, $class, $level)";
     $result = $pdo->query($query);
   }
 ?>
@@ -192,7 +202,7 @@
   <div class="hero-section">
     <h1 class="hero-title" style="text-align: center;">Basic RPG</h1>
     <h2 class="hero-subtitle" style="text-align: center;">Character Sheet Management System</h2>
-    <h4 style="text-align: center;">Version 2.2.3</h4>
+    <h4 style="text-align: center;">Version 3.1.0</h4>
     <div class="searchbar">
       <form action="index.php" method="POST" class="search-form">
         <input type="text" id="search" name="search" required>
@@ -230,17 +240,19 @@
   <fieldset id="roster">
     <legend>Character Roster</legend>
     <?php
+      $user_id = $_SESSION['user_id'];
       if(isset($_POST['search']) && !empty($_POST['search'])) {
         $search = $pdo->quote("%".$_POST['search']."%");
-        $query  = "SELECT * FROM char_sheets WHERE cname like $search";
+        $query  = "SELECT * FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE cname like $search AND uid=$user_id";
         $result = $pdo->query($query);
 
       } else {
-        $query  = "SELECT * FROM char_sheets";
+        $query  = "SELECT * FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE uid=$user_id";
         $result = $pdo->query($query);
       }
       while ($row = $result->fetch()) {
-        $id = htmlspecialchars($row['id']);
+        $id = htmlspecialchars($row['cid']);
+        $ud = htmlspecialchars($row['uid']);
         $r0 = htmlspecialchars($row['cname']);
         $r1 = htmlspecialchars($row['age']);
         $r2 = htmlspecialchars($row['gender']);
@@ -253,7 +265,7 @@
           echo <<<_END
           <div class="homes">
           <form action='index.php' method='post'>
-          <button id='delete-btn' type='submit' name='delete' value='Character Deleted'>
+          <button id='delete-btn' type='submit' name='delete' value=$id>
           <pre>
             <table>
               <tr>
@@ -308,4 +320,4 @@
   </script>
 </body>
 </html>
-<?php session_unset(); session_destroy(); ?>
+<?php // session_unset(); session_destroy(); ?>
