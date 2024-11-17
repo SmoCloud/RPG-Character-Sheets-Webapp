@@ -1,0 +1,174 @@
+body {
+    background-color: skyblue;
+    font-family: Arial, sans-serif;
+}
+  /* Add a wrapper for the table for better layout control */
+.table-container {
+    width: 100%;
+    overflow: hidden;  /* Contains the floated elements */
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.half-width-left-align {
+    width: 50%;
+    float: none;  /* Explicitly remove float */
+}
+
+/* Create a clear break in the layout */
+.form-container {
+    width: 100%;
+    clear: both;  /* Forces this below floated elements */
+    display: block;  /* Ensures block-level display */
+}
+form {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+}
+fieldset {
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+legend {
+    font-size: 2rem;
+}
+label {
+    display: inline-block;
+    width: 70px;
+    margin-bottom: 5px;
+}
+input[type="text"] {
+    padding: 5px;
+    width: 200px;
+}
+input[type="submit"] {
+    margin-top: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+h1, h2 {
+    margin-bottom: 20px;
+}
+.search-container {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search-form input[type="text"] {
+    padding: 5px;
+    width: 300px;
+}
+.search-results {
+    margin-top: 20px;
+}
+.search-results h3 {
+    margin-bottom: 15px;
+}
+.table-container {
+    margin-top: 40px;
+}
+.container {
+    display: block;
+    font-size:1.2rem;
+    width: 500px;
+    margin: 0 auto;
+}
+.container-inner {
+    display: flex;
+    background-color:lavender
+}
+.searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Rest of your existing styles remain unchanged */
+.table-container {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+.homes {
+    background-color: navajowhite;
+    display: inline-flex;
+    align-items: top;
+    justify-content: left;
+    border: 1px solid silver;
+    margin: 0 10px;
+}
+.homes:hover {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0 20px;
+    border: 2px dashed silver;
+    background-color:antiquewhite;
+}
+#edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background-color: aliceblue;
+    border: 1px solid chartreuse;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+#edit-btn:hover {
+    background-color: silver;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background-color: navajowhite;
+    padding: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+#delete-btn:hover {
+    background-color: antiquewhite;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#new-btn {
+    font-size: 1.5rem;
+    background-color:ghostwhite;
+    color:navy;
+    border: 1px solid silver;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+#new-btn:hover {
+    background-color: silver;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#add {
+    background-color:burlywood;
+    color:navy;
+}
+#roster {
+    background-color:darkseagreen;
+    color:navy;
+}

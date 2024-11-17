@@ -179,106 +179,21 @@
   <title>Basic RPG - Character Sheet Management</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="styles.css"> -->
-  <style>
-    body {
-      background-color: skyblue;
-      font-family: Arial, sans-serif;
-    }
-    fieldset {
-      margin: 20px 0;
-      padding: 20px;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    legend {
-      font-size: 2rem;
-    }
-    .container {
-      display: block;
-      font-size:1.2rem;
-      width: 500px;
-      margin: 0 auto;
-    }
-    .container-inner {
-      display: flex;
-      background-color:lavender
-    }
-    .searchbar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .homes {
-      background-color: navajowhite;
-      display: inline-flex;
-      align-items: top;
-      justify-content: left;
-      border: 1px solid silver;
-      margin: 0 10px;
-    }
-    .homes:hover {
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-      margin: 0 20px;
-      border: 2px dashed silver;
-      background-color:antiquewhite;
-    }
-    #edit-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      background-color: aliceblue;
-      border: 1px solid chartreuse;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      padding: 10px;
-    }
-    #edit-btn:hover {
-      background-color: silver;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    #delete-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      background-color: navajowhite;
-      padding: 10px;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-      border: none;
-    }
-    #delete-btn:hover {
-      background-color: antiquewhite;
-      padding: 20px;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    #new-btn {
-      font-size: 1.5rem;
-      background-color:ghostwhite;
-      color:navy;
-      border: 1px solid silver;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    #new-btn:hover {
-      background-color: silver;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    #add {
-      background-color:burlywood;
-      color:navy;
-    }
-    #roster {
-      background-color:darkseagreen;
-      color:navy;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1 style="text-align: center;">Basic RPG</h1>
-    <h2 style="text-align: center;">Character Sheet Management System</h2>
+  <div class="hero-section">
+    <h1 class="hero-title" style="text-align: center;">Basic RPG</h1>
+    <h2 class="hero-subtitle" style="text-align: center;">Character Sheet Management System</h2>
     <h4 style="text-align: center;">Version 2.2.3</h4>
-
+    <div class="searchbar">
+      <form action="index.php" method="POST" class="search-form">
+        <input type="text" id="search" name="search" required>
+        <input type="submit" value="Search">
+      </form>
+    </div>
+  </div>
+  <div class="container">
     <form action="index.php" method="post" autocomplete="off">
       <fieldset id="add">
         <legend>New Character Sheet</legend>
@@ -303,12 +218,6 @@
         <button id="new-btn" type="submit" value="Character Sheet Created">Create Character Sheet</button>
         </pre>
       </fieldset>
-    </form>
-  </div>
-  <div class="searchbar">
-    <form action="index.php" method="POST" class="search-form">
-      <input type="text" id="search" name="search" required>
-      <input type="submit" value="Search">
     </form>
   </div>
   <fieldset id="roster">
