@@ -1,5 +1,12 @@
 <?php
   session_start();
+  require_once 'auth.php';
+
+  // Check if user is logged in
+  if (!is_logged_in()) {
+      header('Location: login.php');
+      exit;
+  }
   # Testing lab computer can change repo
   function editCharacter($id, $nm, $a, $g, $rc, $cl, $lvl) {
     echo <<<_END
