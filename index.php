@@ -196,19 +196,26 @@
   <title>Basic RPG - Character Sheet Management</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
-  <div class="hero-section">
-    <h1 class="hero-title" style="text-align: center;">Basic RPG</h1>
-    <h2 class="hero-subtitle" style="text-align: center;">Character Sheet Management System</h2>
-    <h4 style="text-align: center;">Version 3.1.0</h4>
+  <section class="border">
     <div class="searchbar">
       <form action="index.php" method="POST" class="search-form">
         <input type="text" id="search" name="search" required>
         <input type="submit" value="Search">
       </form>
     </div>
+    <div class="navbar">
+      <a href="login.php">Login</a>
+      <a href="register.php">Create an Account</a>
+      <a href="index.php">Home</a>
+    </div>
+  </section>
+  <div class="hero-section">
+    <h1 class="hero-title" style="text-align: center;">Basic RPG</h1>
+    <h2 class="hero-subtitle" style="text-align: center;">Character Sheet Management System</h2>
+    <h4 style="text-align: center;">Version 3.1.0</h4>
   </div>
   <div class="container">
     <form action="index.php" method="post" autocomplete="off">
