@@ -136,69 +136,12 @@
   catch (PDOException $e) {
     throw new PDOException($e->getMessage(), (int)$e->getCode());
   }
-
-  if (isset($_POST['delete']) && isset($_POST['cname'])) {
-    $cname  = $pdo->quote($_POST['cname']);
-    $seed   = $pdo->quote($_POST['delete']);
-    $query  = "DELETE char_sheets FROM char_sheets JOIN users ON char_sheets.uid=users.id WHERE cname=$cname";
-    $result = $pdo->query($query);
-    $reseed = "DBCC CHECKIDENT (char_sheets, RESEED, $seed)";
-    $pdo->query($reseed);
-
-  }
-  elseif(isset($_POST['edit'])) {
-    $_SESSION['edit'] = true;
-  }
-  elseif(isset($_POST['update'])) {
-    $user_id = $_SESSION['user_id'];
-    session_unset();
-    $_SESSION['user_id'] = $user_id;
-    // unset($_POST['edit']);
-    if (isset($_POST['cname']) &&
-      isset($_POST['age']) &&
-      isset($_POST['gender']) &&
-      isset($_POST['race']) &&
-      isset($_POST['char-class']) && 
-      isset($_POST['level']) &&
-      isset($_POST['edit-id'])) {
-      $cname    = $pdo->quote($_POST['cname']);
-      $age      = $pdo->quote($_POST['age']);
-      $user_id  = $pdo->quote($_SESSION['user_id']);
-      $gender   = $pdo->quote($_POST['gender']);
-      $race     = $pdo->quote($_POST['race']);
-      $class    = $pdo->quote($_POST['char-class']);
-      $level    = $pdo->quote($_POST['level']);
-      $id       = $pdo->quote($_POST['edit-id']);
-      
-      $query    = "UPDATE char_sheets SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level 
-                  FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE cid=$id AND uid=$user_id";
-      $result = $pdo->query($query);
-    }
-  }
-  if (!isset($_POST['update']) && 
-      isset($_POST['cname'])   &&
-      isset($_POST['age']) &&
-      isset($_POST['gender']) &&
-      isset($_POST['race']) &&
-      isset($_POST['char-class']) && 
-      isset($_POST['level'])) {
-    $cname    = $pdo->quote($_POST['cname']);
-    $user_id  = $pdo->quote($_SESSION['user_id']);
-    $age      = $pdo->quote($_POST['age']);
-    $gender   = $pdo->quote($_POST['gender']);
-    $race     = $pdo->quote($_POST['race']);
-    $class    = $pdo->quote($_POST['char-class']);
-    $level    = $pdo->quote($_POST['level']);
-    
-    $query    = "INSERT INTO char_sheets (cname, uid, age, gender, race, class, level) VALUES ($cname, $user_id, $age, $gender, $race, $class, $level)";
-    $result = $pdo->query($query);
-  }
 ?>
 
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <title>Basic RPG - Character Sheet Management - Version 3.2.2</title>
+  <title>Basic RPG - Character Sheet Management - Version 3.3.2</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css" type="text/css">
@@ -221,38 +164,102 @@
   </section>
   <div class="hero-section">
     <h1 class="hero-title" style="text-align: center;">RPG Character Sheet Management System</h1>
-    <h2 class="hero-subtitle" style="text-align: center;"><?php echo $_SESSION['username']."'s Character Gallery" ?></h2>
+    <h2 class="hero-subtitle" style="text-align: center;"><?php echo $_SESSION['username']."'s Character Sheet Gallery";?></h2>
   </div>
-  <div class="container">
-    <form action="index.php" method="post" autocomplete="off">
-      <fieldset id="add">
-        <legend>New Character Sheet</legend>
-        <pre>
-  Name: <input type="text" name="cname" required>
+  <?php
+    if (isset($_POST['delete']) && isset($_POST['cname'])) {
+      $username = $_SESSION['username'];
+      $cname  = $pdo->quote($_POST['cname']);
+      $query  = "DELETE char_sheets FROM char_sheets JOIN users ON char_sheets.uid=users.id WHERE cname=$cname";
+      $result = $pdo->query($query);
+      echo "<h4 style='text-align: center;'>Character ".$cname." removed from ".$username."'s Gallery.</h4>";
+    }
+    elseif(isset($_POST['edit'])) {
+      $_SESSION['edit'] = true;
+    }
+    elseif(isset($_POST['update'])) {
+      $user_id = $_SESSION['user_id'];
+      $username = $_SESSION['username'];
+      session_unset();
+      $_SESSION['username'] = $username;
+      $_SESSION['user_id'] = $user_id;
+      // unset($_POST['edit']);
+      if (isset($_POST['cname']) &&
+        isset($_POST['age']) &&
+        isset($_POST['gender']) &&
+        isset($_POST['race']) &&
+        isset($_POST['char-class']) && 
+        isset($_POST['level']) &&
+        isset($_POST['edit-id'])) {
+        $cname    = $pdo->quote($_POST['cname']);
+        $age      = $pdo->quote($_POST['age']);
+        $user_id  = $pdo->quote($_SESSION['user_id']);
+        $gender   = $pdo->quote($_POST['gender']);
+        $race     = $pdo->quote($_POST['race']);
+        $class    = $pdo->quote($_POST['char-class']);
+        $level    = $pdo->quote($_POST['level']);
+        $id       = $pdo->quote($_POST['edit-id']);
+        
+        $query    = "UPDATE char_sheets SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level 
+                    FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE cid=$id AND uid=$user_id";
+        $result = $pdo->query($query);
+        echo "<h4>Character ".$cname." updated in ".$username."'s Gallery.</h4>";
+      }
+    }
+    elseif (!isset($_POST['update']) && 
+        isset($_POST['cname'])   &&
+        isset($_POST['age']) &&
+        isset($_POST['gender']) &&
+        isset($_POST['race']) &&
+        isset($_POST['char-class']) && 
+        isset($_POST['level'])) {
+      $username = $_SESSION['username'];
+      $cname    = $pdo->quote($_POST['cname']);
+      $user_id  = $pdo->quote($_SESSION['user_id']);
+      $age      = $pdo->quote($_POST['age']);
+      $gender   = $pdo->quote($_POST['gender']);
+      $race     = $pdo->quote($_POST['race']);
+      $class    = $pdo->quote($_POST['char-class']);
+      $level    = $pdo->quote($_POST['level']);
+      
+      $query    = "INSERT INTO char_sheets (cname, uid, age, gender, race, class, level) VALUES ($cname, $user_id, $age, $gender, $race, $class, $level)";
+      $result = $pdo->query($query);
+      echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
+    }
+    if ((isset($_POST['create-sheet']) && $_POST['create-sheet']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery']))) {
+      echo <<<_END
+            <div class="container">
+              <form action="index.php" method="post" autocomplete="off">
+                <fieldset id="add">
+                  <legend>New Character Sheet</legend>
+                  <pre>
+            Name: <input type="text" name="cname" required>
 
-  Age:  <input type="text" name="age" required>
+            Age:  <input type="text" name="age" required>
 
-  Gender:<input type="radio" name="gender" value="male" required>Male   <input type="radio" name="gender" value="female">Female   <input type="radio" name="gender" value="other">Other
+            Gender:<input type="radio" name="gender" value="male" required>Male   <input type="radio" name="gender" value="female">Female   <input type="radio" name="gender" value="other">Other
 
-  Race:<input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid
-       <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome
-       <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead
+            Race:<input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid
+                <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome
+                <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead
 
-  Class:<input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue
-        <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
-        <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
-        <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
+            Class:<input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue
+                  <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
+                  <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
+                  <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
 
-  Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output></p>
+            Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output></p>
 
-        <button id="new-btn" type="submit" value="Character Sheet Created">Create Character Sheet</button>
-        </pre>
-      </fieldset>
-    </form>
-  </div>
-  <fieldset id="roster">
-    <legend>Character Roster</legend>
-    <?php
+                  <button id="new-btn" type="submit" value="Character Sheet Created">Create Character Sheet</button>
+                  </pre>
+                </fieldset>
+              </form>
+            </div>
+      _END;
+    }
+    if ((isset($_POST['gallery']) && $_POST['gallery']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery']))) {
+      echo '<fieldset id="roster">
+        <legend>Character Roster</legend>';
       $user_id = $_SESSION['user_id'];
       if(isset($_POST['search']) && !empty($_POST['search'])) {
         $search = $pdo->quote("%".$_POST['search']."%");
@@ -283,7 +290,7 @@
             <table>
               <tr>
                 <td>Name:</td>
-                <td>$r0</td>
+                <td id='char-name'>$r0</td>
               </tr>
               <tr>
                 <td>Age:</td>
@@ -319,17 +326,25 @@
           _END;
         }
       }
-    ?>
+    }
+  ?>
   </fieldset>
   <script type='text/javascript' defer>
     const level = document.querySelectorAll("#level");
     const displayLevel = document.querySelectorAll("#value");
-    for(let i= 0; i < level.length; i++) {
+    const deleteSheets = document.querySelectorAll('#delete-btn');
+    for(let i=0; i < level.length; i++) {
       displayLevel[i].textContent = level[i].value;
       level[i].addEventListener("input", (event) => {
         displayLevel[i].textContent = event.target.value;
       });
     }
+    deleteSheets.forEach(button => {
+      button.addEventListener("click", (event) => {
+        charName = deleteSheets[i].getElementById('char-name').value;
+        window.alert("Are you sure you want to delete " + charName + " ?");
+      });
+    });
   </script>
 </body>
 </html>
