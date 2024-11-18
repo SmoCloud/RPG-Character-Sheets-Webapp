@@ -31,13 +31,36 @@ label {
 }
 input[type="text"] {
     padding: 5px;
+    margin: 5px;
     width: 200px;
 }
-input[type="submit"] {
+input[type="password"] {
+    padding: 5px;
+    margin: 5px;
+    width: 200px;
+}
+button {
+    padding: 10px;
+    margin: 5px;
     cursor: pointer;
 }
 h1, h2 {
     margin-bottom: 20px;
+}
+.auth-container {
+    display: grid;
+    column-count: 1;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.auth-form {
+    display: grid;
+    column-count: 2;
+    justify-content: inherit;
+    align-items: inherit;
+    width: 100%;
 }
 .border {
     display: inline-flex;

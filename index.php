@@ -7,6 +7,9 @@
       header('Location: login.php');
       exit;
   }
+  if(isset($_POST['logout']) && $_POST['logout']) {
+    logout_user();
+  }
   # Testing lab computer can change repo
   function editCharacter($id, $nm, $a, $g, $rc, $cl, $lvl) {
     echo <<<_END
@@ -207,8 +210,9 @@
       </form>
     </div>
     <div class="navbar">
-      <a href="login.php">Login</a>
-      <a href="register.php">Create an Account</a>
+      <form action="index.php" method="post"></form>
+        <button type="submit" name="logout" value="true">Logout</button>
+      </form> 
       <a href="index.php">Home</a>
     </div>
   </section>

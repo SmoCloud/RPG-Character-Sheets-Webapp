@@ -1,24 +1,24 @@
 <?php
-// login.php - Login page
-session_start();
-require_once 'config.php';
-require_once 'auth.php';
+    // login.php - Login page
+    session_start();
+    require_once 'config.php';
+    require_once 'auth.php';
 
-$error_message = '';
+    $error_message = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['login'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        
-        if (login_user($pdo, $username, $password)) {
-            header('Location: index.php');
-            exit;
-        } else {
-            $error_message = 'Invalid username or password';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['login'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            
+            if (login_user($pdo, $username, $password)) {
+                header('Location: index.php');
+                exit;
+            } else {
+                $error_message = 'Invalid username or password';
+            }
         }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
         <?php endif; ?>
         
-        <form method="POST" action="" class="auth-form">
+        <form method="POST" action="login.php" class="auth-form">
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" name="login">Login</button>
+                <button type="submit" name="login">Login</button>
         </form>
         <p>Don't have an account? <a href="register.php">Register here</a></p>
     </div>
