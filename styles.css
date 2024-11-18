@@ -12,10 +12,6 @@ th, td {
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
-form {
-    width: 100%;
-    max-width: 500px;
-}
 fieldset {
     margin: 20px 0;
     padding: 20px;
@@ -65,31 +61,31 @@ h1, h2 {
 .border {
     display: inline-flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: end;
     align-items: center;
     background-color: #791919;
 }
 
   /* Navbar container */
 .navbar {
+    display: block;
     width: inherit;
     overflow: hidden;
     font-family: Arial;
     justify-content: end;
 }
-
-/* Navbar links */
-.navbar a {
+.navbar button {
     float: right;
     font-size: 16px;
     color: rgb(218, 247, 166);
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 14px;
     text-decoration: none;
+    background-color: #791919;
+    border: 0;
 }
-
-/* Change background color of navbar links on mouse hover */
-.navbar a:hover {
+.navbar button:hover {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
     background-color: red;
 }
 .container {

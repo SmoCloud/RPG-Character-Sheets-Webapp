@@ -9,6 +9,8 @@
   }
   if(isset($_POST['logout']) && $_POST['logout']) {
     logout_user();
+    header('Location: login.php');
+    exit;
   }
   # Testing lab computer can change repo
   function editCharacter($id, $nm, $a, $g, $rc, $cl, $lvl) {
@@ -196,7 +198,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <title>Basic RPG - Character Sheet Management</title>
+  <title>Basic RPG - Character Sheet Management - Version 3.2.2</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css" type="text/css">
@@ -205,21 +207,21 @@
   <section class="border">
     <div class="searchbar">
       <form action="index.php" method="POST" class="search-form">
-        <input type="text" id="search" name="search" required>
         <input type="submit" value="Search">
+        <input type="text" id="search" name="search" required>
       </form>
     </div>
     <div class="navbar">
-      <form action="index.php" method="post"></form>
+      <form action="index.php" method="post">
         <button type="submit" name="logout" value="true">Logout</button>
-      </form> 
-      <a href="index.php">Home</a>
+        <button type="submit" name="create-sheet" value="true">Create RPG Sheet</button>
+        <button type="submit" name="gallery" value="true">Your Sheet Gallery</button>
+      </form>
     </div>
   </section>
   <div class="hero-section">
-    <h1 class="hero-title" style="text-align: center;">Basic RPG</h1>
-    <h2 class="hero-subtitle" style="text-align: center;">Character Sheet Management System</h2>
-    <h4 style="text-align: center;">Version 3.1.0</h4>
+    <h1 class="hero-title" style="text-align: center;">RPG Character Sheet Management System</h1>
+    <h2 class="hero-subtitle" style="text-align: center;"><?php echo $_SESSION['username']."'s Character Gallery" ?></h2>
   </div>
   <div class="container">
     <form action="index.php" method="post" autocomplete="off">
