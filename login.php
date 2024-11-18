@@ -26,7 +26,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - RPG Character Sheets</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="styles.css" type="text/css"/>
 </head>
 <body>
     <div class="auth-container">

@@ -35,6 +35,7 @@ function is_logged_in() {
 
 function logout_user() {
     $_SESSION = array();
+    session_unset();
     session_destroy();
 }
 ?>

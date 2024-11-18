@@ -144,7 +144,7 @@
   <title>Basic RPG - Character Sheet Management - Version 3.4.2</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css" type="text/css">
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
 </head>
 <body>
   <section class="border">
@@ -183,7 +183,6 @@
       session_unset();
       $_SESSION['username'] = $username;
       $_SESSION['user_id'] = $user_id;
-      // unset($_POST['edit']);
       if (isset($_POST['cname']) &&
         isset($_POST['age']) &&
         isset($_POST['gender']) &&
@@ -200,8 +199,8 @@
         $level    = $pdo->quote($_POST['level']);
         $id       = $pdo->quote($_POST['edit-id']);
         
-        $query    = "UPDATE char_sheets SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level 
-                    FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE cid=$id AND uid=$user_id";
+        $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id 
+                      SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
         $result = $pdo->query($query);
         echo "<h4>Character ".$cname." updated in ".$username."'s Gallery.</h4>";
       }
@@ -286,7 +285,6 @@
           <div class="homes">
           <form action='index.php' method='post'>
           <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
-          <pre>
             <table>
               <tr>
                 <td>Name:</td>
@@ -312,14 +310,16 @@
                 <td>Level:</td>
                 <td>$r5</td>
               </tr>
+            </table>
+          </button>
+          <button id='edit-btn' type='submit' name='edit' value='$id'">
+            <table>
               <tr>
-                <td><br><br>
-                  <input type='hidden' name='cname' value='$r0'>
-                  <button id='edit-btn' type='submit' name='edit' value='$id'>Edit</button>
+                <td>
+            Edit<input type='hidden' name='cname' value='$r0'>
                 </td>
               </tr>
             </table>
-          </pre>
           </button>
           </form>
           </div>
