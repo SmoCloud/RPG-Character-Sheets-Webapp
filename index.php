@@ -285,12 +285,12 @@
           echo <<<_END
           <div class="homes">
           <form action='index.php' method='post'>
-          <button id='delete-btn' type='submit' name='delete' value=$id>
+          <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
           <pre>
             <table>
               <tr>
                 <td>Name:</td>
-                <td id='char-name'>$r0</td>
+                <td>$r0</td>
               </tr>
               <tr>
                 <td>Age:</td>
@@ -330,19 +330,12 @@
   ?>
   </fieldset>
   <script type='text/javascript' defer>
-    const level = document.querySelectorAll("#level");
+    const levels = document.querySelectorAll("#level");
     const displayLevel = document.querySelectorAll("#value");
-    const deleteSheets = document.querySelectorAll('#delete-btn');
-    for(let i=0; i < level.length; i++) {
-      displayLevel[i].textContent = level[i].value;
-      level[i].addEventListener("input", (event) => {
-        displayLevel[i].textContent = event.target.value;
-      });
-    }
-    deleteSheets.forEach(button => {
-      button.addEventListener("click", (event) => {
-        charName = deleteSheets[i].getElementById('char-name').value;
-        window.alert("Are you sure you want to delete " + charName + " ?");
+    levels.forEach((level, idx) => {
+      displayLevel[idx].textContent = level.value;
+      level.addEventListener("input", (newLevel) => {
+        displayLevel[idx].textContent = newLevel.target.value;
       });
     });
   </script>
