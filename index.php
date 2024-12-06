@@ -166,6 +166,9 @@
     <h1 class="hero-title" style="text-align: center;">RPG Character Sheet Management System</h1>
     <h2 class="hero-subtitle" style="text-align: center;"><?php echo $_SESSION['username']."'s Character Sheet Gallery";?></h2>
   </div>
+  <div class="game-selection">
+    
+  </div>
   <?php
     if (isset($_POST['delete']) && isset($_POST['cname'])) {
       $username = $_SESSION['username'];
