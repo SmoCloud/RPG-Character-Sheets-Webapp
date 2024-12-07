@@ -9,7 +9,11 @@
   }
   if(isset($_POST['logout']) && $_POST['logout']) {
     logout_user();
-    header('Location: login.php');
+    header('Location: index.php');
+    exit;
+  }
+  if(isset($_POST['change-game']) && $_POST['change-game']) {
+    header('Location: index.php');
     exit;
   }
   # Testing lab computer can change repo
@@ -149,14 +153,15 @@
 <body>
   <section class="border">
     <div class="searchbar">
-      <form action="index.php" method="POST" class="search-form">
+      <form action="gallery.php" method="POST" class="search-form">
         <input type="submit" value="Search">
         <input type="text" id="search" name="search" required>
       </form>
     </div>
     <div class="navbar">
-      <form action="index.php" method="post">
+      <form action="gallery.php" method="post">
         <button type="submit" name="logout" value="true">Logout</button>
+        <button type="submit" name="change-game" value="true">Change RPG Game</button>
         <button type="submit" name="create-sheet" value="true">Create RPG Sheet</button>
         <button type="submit" name="gallery" value="true">Your Sheet Gallery</button>
       </form>
@@ -170,7 +175,7 @@
     if (isset($_POST['delete']) && isset($_POST['cname'])) {
       $username = $_SESSION['username'];
       $cname  = $pdo->quote($_POST['cname']);
-      $query  = "DELETE char_sheets FROM char_sheets JOIN users ON char_sheets.uid=users.id WHERE cname=$cname";
+      $query  = "DELETE char_sheets FROM char_sheets JOIN users ON char_sheets.uid=users.id JOIN games ON char_sheets.gid = games.id WHERE cname=$cname";
       $result = $pdo->query($query);
       echo "<h4 style='text-align: center;'>Character ".$cname." removed from ".$username."'s Gallery.</h4>";
     }
@@ -199,7 +204,7 @@
         $level    = $pdo->quote($_POST['level']);
         $id       = $pdo->quote($_POST['edit-id']);
         
-        $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id 
+        $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
                       SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
         $result = $pdo->query($query);
         echo "<h4>Character ".$cname." updated in ".$username."'s Gallery.</h4>";
@@ -215,20 +220,21 @@
       $username = $_SESSION['username'];
       $cname    = $pdo->quote($_POST['cname']);
       $user_id  = $pdo->quote($_SESSION['user_id']);
+      $game_id  = $pdo->quote($_SESSION['game_id']);
       $age      = $pdo->quote($_POST['age']);
       $gender   = $pdo->quote($_POST['gender']);
       $race     = $pdo->quote($_POST['race']);
       $class    = $pdo->quote($_POST['char-class']);
       $level    = $pdo->quote($_POST['level']);
       
-      $query    = "INSERT INTO char_sheets (cname, uid, age, gender, race, class, level) VALUES ($cname, $user_id, $age, $gender, $race, $class, $level)";
+      $query    = "INSERT INTO char_sheets (cname, uid, gid, age, gender, race, class, level) VALUES ($cname, $user_id, $game_id, $age, $gender, $race, $class, $level)";
       $result = $pdo->query($query);
       echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
     }
     if ((isset($_POST['create-sheet']) && $_POST['create-sheet']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery']))) {
       echo <<<_END
             <div class="container">
-              <form action="index.php" method="post" autocomplete="off">
+              <form action="gallery.php" method="post" autocomplete="off">
                 <fieldset id="add">
                   <legend>New Character Sheet</legend>
                   <pre>
@@ -262,16 +268,17 @@
       $user_id = $_SESSION['user_id'];
       if(isset($_POST['search']) && !empty($_POST['search'])) {
         $search = $pdo->quote("%".$_POST['search']."%");
-        $query  = "SELECT * FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE cname like $search AND uid=$user_id";
+        $query  = "SELECT * FROM char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id WHERE cname like $search AND uid=$user_id";
         $result = $pdo->query($query);
 
       } else {
-        $query  = "SELECT * FROM char_sheets JOIN users ON char_sheets.uid = users.id WHERE uid=$user_id";
+        $query  = "SELECT * FROM char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id WHERE uid=$user_id";
         $result = $pdo->query($query);
       }
       while ($row = $result->fetch()) {
         $id = htmlspecialchars($row['cid']);
         $ud = htmlspecialchars($row['uid']);
+        $gd = htmlspecialchars($row['gid']);
         $r0 = htmlspecialchars($row['cname']);
         $r1 = htmlspecialchars($row['age']);
         $r2 = htmlspecialchars($row['gender']);
@@ -283,7 +290,7 @@
         } else {
           echo <<<_END
           <div class="homes">
-          <form action='index.php' method='post'>
+          <form action='gallery.php' method='post'>
           <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
             <table>
               <tr>

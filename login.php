@@ -14,7 +14,7 @@
             if (login_user($pdo, $username, $password) && !isset($_SESSION['game_id'])) {
                 header('Location: index.php');
                 exit;
-            } elseif(login_user($pdo, $username, $password) && !isset($_SESSION['game_id'])) {
+            } elseif(login_user($pdo, $username, $password) && isset($_SESSION['game_id'])) {
                 header('Location: gallery.php');
                 exit;
             } else {
