@@ -68,7 +68,7 @@
         <tr>
           <td>
             <input type="hidden" name="D&D" value="D&D"/>
-            <button type="submit" class="d&d-btn"><img src="imgs/d&d_sheets.jpg"/></button>
+            <button type="submit" class="d&d-btn"><img src="public/imgs/d&d_sheets.jpg"/></button>
           </td>
           <td>
             <h2>Dungeons & Dragons - 5e Character Sheet (Basic)</h2>
@@ -97,11 +97,11 @@
   </div>
   <div id = "canvas_container">
    <canvas id = "pdf_renderer"> </canvas>
-</div>
+  </div>
+
   <?php
   
   ?>
 </body>
-<script
 </html>
 <?php // session_unset(); session_destroy(); ?>
