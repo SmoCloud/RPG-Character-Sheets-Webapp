@@ -20,7 +20,7 @@
   function editCharacter($id, $nm, $a, $g, $rc, $cl, $lvl) {
     echo <<<_END
       <div class="homes">
-      <form action='index.php' method='post'>
+      <form action='gallery.php' method='post'>
       <pre>
         <table>
           <tr>

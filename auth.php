@@ -15,7 +15,7 @@ function register_user($pdo, $username, $password) {
 }
 
 function login_user($pdo, $username, $password) {
-    $sql = "SELECT * FROM users WHERE username = :username";
+    $sql = "SELECT * FROM users WHERE username COLLATE utf8mb4_0900_as_cs = :username";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['username' => $username]);
     $user = $stmt->fetch();
