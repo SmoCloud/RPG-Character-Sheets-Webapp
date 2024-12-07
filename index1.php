@@ -62,44 +62,46 @@
     <h1 class="hero-title" style="text-align: center;">RPG Character Sheet Management System</h1>
     <h2 class="hero-subtitle" style="text-align: center;"><?php echo $_SESSION['username']."'s Game History";?></h2>
   </div>
+  <div class="game-selection">
+    <table>
+      <form action="index.php" method="post">
+        <tr>
+          <td>
+            <input type="hidden" name="D&D" value="D&D"/>
+            <button type="submit" class="d&d-btn"><img src="imgs/d&d_sheets.jpg"/></button>
+          </td>
+          <td>
+            <h2>Dungeons & Dragons - 5e Character Sheet (Basic)</h2>
+            <br>
+            <hr>
+            <p>
+              Create a character sheet for Dungeons and Dragons - 5th Edition. This is a basic character sheet that only contains the core stats.
+              The optional character details and chracter spellcasting sheets are (currently) not available.
+            </p>
+          </td>
+        </tr>
+      </form>
+    </table>
+  </div>
+  <div class="pdf-toolbar">
+   <div id="navigation_controls">
+      <button class="pdf-toolbar-button" id="previous">Previous</button>
+      <input class="pdf-input" id="current_page" value="1" type="number"/>
+      <button class="pdf-toolbar-button" id="next">Next</button>
+    </div>
+
+   <div id="zoom_controls">  
+     <button class="pdf-toolbar-button" id="zoom_in">+</button>
+     <button class="pdf-toolbar-button" id="zoom_out">-</button>
+    </div>
+  </div>
+  <div id = "canvas_container">
+   <canvas id = "pdf_renderer"> </canvas>
+</div>
   <?php
-    if(isset($_POST['edit'])) {
-      $_SESSION['edit'] = true;
-    }
-    
-    if (isset($_POST['create-game']) && $_POST['create-game']) {
-      echo <<<_END
-            <div class="container">
-              <form action="index.php" method="post" autocomplete="off">
-                <fieldset id="add">
-                  <legend>New RPG Game</legend>
-                  <pre>
-            Name: <input type="text" name="cname" required>
-
-            Age:  <input type="text" name="age" required>
-
-            Gender:<input type="radio" name="gender" value="male" required>Male   <input type="radio" name="gender" value="female">Female   <input type="radio" name="gender" value="other">Other
-
-            Race:<input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid
-                <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome
-                <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead
-
-            Class:<input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue
-                  <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
-                  <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
-                  <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
-
-            Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output></p>
-
-                  <button id="new-btn" type="submit" value="Character Sheet Created">Create Character Sheet</button>
-                  </pre>
-                </fieldset>
-              </form>
-            </div>
-      _END;
-    }
+  
   ?>
-  </fieldset>
 </body>
+<script
 </html>
 <?php // session_unset(); session_destroy(); ?>
