@@ -11,8 +11,11 @@
             $username = $_POST['username'];
             $password = $_POST['password'];
             
-            if (login_user($pdo, $username, $password)) {
+            if (login_user($pdo, $username, $password) && !isset($_SESSION['game_id'])) {
                 header('Location: index.php');
+                exit;
+            } elseif(login_user($pdo, $username, $password) && !isset($_SESSION['game_id'])) {
+                header('Location: gallery.php');
                 exit;
             } else {
                 $error_message = 'Invalid username or password';
