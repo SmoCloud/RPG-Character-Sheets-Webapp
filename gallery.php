@@ -28,8 +28,8 @@
             <td><input type='text' name='cname' placeholder=$nm value=$nm></td>
           </tr>
           <tr>
-            <td>Age:</td>
-            <td><input type='text' name='age' placeholder=$a value=$a></td>
+            <td>Background:</td>
+            <td><input type='text' name='background' placeholder=$a value=$a></td>
           </tr>
           <tr>
             <td>Gender:</td>
@@ -189,14 +189,14 @@
       $_SESSION['username'] = $username;
       $_SESSION['user_id'] = $user_id;
       if (isset($_POST['cname']) &&
-        isset($_POST['age']) &&
+        isset($_POST['background']) &&
         isset($_POST['gender']) &&
         isset($_POST['race']) &&
         isset($_POST['char-class']) && 
         isset($_POST['level']) &&
         isset($_POST['edit-id'])) {
         $cname    = $pdo->quote($_POST['cname']);
-        $age      = $pdo->quote($_POST['age']);
+        $background      = $pdo->quote($_POST['background']);
         $user_id  = $pdo->quote($_SESSION['user_id']);
         $gender   = $pdo->quote($_POST['gender']);
         $race     = $pdo->quote($_POST['race']);
@@ -205,14 +205,14 @@
         $id       = $pdo->quote($_POST['edit-id']);
         
         $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
-                      SET cname=$cname, age=$age, gender=$gender, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
+                      SET cname=$cname, background=$background, gender=$gender, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
         $result = $pdo->query($query);
         echo "<h4>Character ".$cname." updated in ".$username."'s Gallery.</h4>";
       }
     }
     elseif (!isset($_POST['update']) && 
         isset($_POST['cname'])   &&
-        isset($_POST['age']) &&
+        isset($_POST['background']) &&
         isset($_POST['gender']) &&
         isset($_POST['race']) &&
         isset($_POST['char-class']) && 
@@ -221,13 +221,20 @@
       $cname    = $pdo->quote($_POST['cname']);
       $user_id  = $pdo->quote($_SESSION['user_id']);
       $game_id  = $pdo->quote($_SESSION['game_id']);
-      $age      = $pdo->quote($_POST['age']);
+      $background      = $pdo->quote($_POST['background']);
       $gender   = $pdo->quote($_POST['gender']);
       $race     = $pdo->quote($_POST['race']);
       $class    = $pdo->quote($_POST['char-class']);
       $level    = $pdo->quote($_POST['level']);
+
+      $pdf_data = [
+        'ClassLevel' => $_POST['char-class'].' - '.$_POST['level'],
+        'PlayerName' => $usename,
+        'CharacterName' => $_POST['cname'],
+        'Race' => $_POST['race']
+      ];
       
-      $query    = "INSERT INTO char_sheets (cname, uid, gid, age, gender, race, class, level) VALUES ($cname, $user_id, $game_id, $age, $gender, $race, $class, $level)";
+      $query    = "INSERT INTO char_sheets (cname, uid, gid, background, gender, race, class, level) VALUES ($cname, $user_id, $game_id, $background, $gender, $race, $class, $level)";
       $result = $pdo->query($query);
       echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
     }
@@ -240,7 +247,7 @@
                   <pre>
             Name: <input type="text" name="cname" required>
 
-            Age:  <input type="text" name="age" required>
+            Background:  <input type="text" name="background" required>
 
             Gender:<input type="radio" name="gender" value="male" required>Male   <input type="radio" name="gender" value="female">Female   <input type="radio" name="gender" value="other">Other
 
@@ -280,7 +287,7 @@
         $ud = htmlspecialchars($row['uid']);
         $gd = htmlspecialchars($row['gid']);
         $r0 = htmlspecialchars($row['cname']);
-        $r1 = htmlspecialchars($row['age']);
+        $r1 = htmlspecialchars($row['background']);
         $r2 = htmlspecialchars($row['gender']);
         $r3 = htmlspecialchars($row['race']);
         $r4 = htmlspecialchars($row['class']);
@@ -298,7 +305,7 @@
                 <td>$r0</td>
               </tr>
               <tr>
-                <td>Age:</td>
+                <td>Background:</td>
                 <td>$r1</td>
               </tr>
               <tr>
