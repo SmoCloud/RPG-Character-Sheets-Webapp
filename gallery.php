@@ -32,10 +32,10 @@
             <td><input type='text' name='background' placeholder=$a value=$a></td>
           </tr>
           <tr>
-            <td>Gender:</td>
+            <td>Alignment:</td>
     _END;
-    // Gender update selector
-    echo "<td><select name='gender' value='$g'>
+    // Alignment update selector
+    echo "<td><select name='alignment' value='$g'>
       <option ";
     if($g === "male") echo "selected='selected'";
     echo "value='male'>Male</option>";
@@ -190,7 +190,7 @@
       $_SESSION['user_id'] = $user_id;
       if (isset($_POST['cname']) &&
         isset($_POST['background']) &&
-        isset($_POST['gender']) &&
+        isset($_POST['alignment']) &&
         isset($_POST['race']) &&
         isset($_POST['char-class']) && 
         isset($_POST['level']) &&
@@ -198,14 +198,14 @@
         $cname    = $pdo->quote($_POST['cname']);
         $background      = $pdo->quote($_POST['background']);
         $user_id  = $pdo->quote($_SESSION['user_id']);
-        $gender   = $pdo->quote($_POST['gender']);
+        $alignment   = $pdo->quote($_POST['alignment']);
         $race     = $pdo->quote($_POST['race']);
         $class    = $pdo->quote($_POST['char-class']);
         $level    = $pdo->quote($_POST['level']);
         $id       = $pdo->quote($_POST['edit-id']);
         
         $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
-                      SET cname=$cname, background=$background, gender=$gender, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
+                      SET cname=$cname, background=$background, alignment=$alignment, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
         $result = $pdo->query($query);
         echo "<h4>Character ".$cname." updated in ".$username."'s Gallery.</h4>";
       }
@@ -213,7 +213,7 @@
     elseif (!isset($_POST['update']) && 
         isset($_POST['cname'])   &&
         isset($_POST['background']) &&
-        isset($_POST['gender']) &&
+        isset($_POST['alignment']) &&
         isset($_POST['race']) &&
         isset($_POST['char-class']) && 
         isset($_POST['level'])) {
@@ -222,7 +222,7 @@
       $user_id  = $pdo->quote($_SESSION['user_id']);
       $game_id  = $pdo->quote($_SESSION['game_id']);
       $background      = $pdo->quote($_POST['background']);
-      $gender   = $pdo->quote($_POST['gender']);
+      $alignment   = $pdo->quote($_POST['alignment']);
       $race     = $pdo->quote($_POST['race']);
       $class    = $pdo->quote($_POST['char-class']);
       $level    = $pdo->quote($_POST['level']);
@@ -234,7 +234,7 @@
         'Race' => $_POST['race']
       ];
       
-      $query    = "INSERT INTO char_sheets (cname, uid, gid, background, gender, race, class, level) VALUES ($cname, $user_id, $game_id, $background, $gender, $race, $class, $level)";
+      $query    = "INSERT INTO char_sheets (cname, uid, gid, background, alignment, race, class, level) VALUES ($cname, $user_id, $game_id, $background, $alignment, $race, $class, $level)";
       $result = $pdo->query($query);
       echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
     }
@@ -245,22 +245,121 @@
                 <fieldset id="add">
                   <legend>New Character Sheet</legend>
                   <pre>
-            Name: <input type="text" name="cname" required>
+             Name: <input type="text" name="cname" required>
 
-            Background:  <input type="text" name="background" required>
+       Background: <input type="text" name="background" required>
 
-            Gender:<input type="radio" name="gender" value="male" required>Male   <input type="radio" name="gender" value="female">Female   <input type="radio" name="gender" value="other">Other
+        Alignment: <input type="radio" name="alignment" value="male" required>Male   <input type="radio" name="alignment" value="female">Female   <input type="radio" name="alignment" value="other">Other
 
-            Race:<input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid
-                <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome
-                <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead
+             Race: <input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid
+                   <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome
+                   <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead
 
-            Class:<input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue
-                  <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
-                  <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
-                  <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
+            Class:  <input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue
+                    <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
+                    <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
+                    <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
 
-            Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output></p>
+             Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output>
+
+         XP Points: <input type="number" name="xp-points">      Inspiration: <input type="checkbox" name="inpiration">
+
+          Strength: <input type="number" name="strength">            Dexterity: <input type="number" name="dexterity"> 
+
+      Constitution: <input type="number" name="constitution">     Intelligence: <input type="number" name="intelligence">
+
+            Wisdom: <input type="number" name="wisdom">               Charisma: <input type="number" name="charisma">
+
+             Armor: <select name="armor-type"><option value="padded">Padded</option><option value="leather">Leather</option><option value="studded">Studded Leather</option>
+            <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
+            <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
+            <option value="splint">Splint</option><option value="plate">Plate</option>
+                  </select>
+
+        Current HP: <input type="number" name="current-hp">     Temporary HP: <input type="number" name="temp-hp">
+
+          Hit Dice: <input type="number" name="hit-dice">
+
+       Death Saves:
+
+        Successes: <input type="range" id="level" name="save-success" min="0" max="3"/> <output id="value"></output>
+
+        Failures: <input type="range" id="level" name="save-failures" min="0" max="3"/> <output id="value"></output>
+
+      Attacks & Spells:
+
+        Name: <input type="text" name="aname">    ATK Bonus: <input type="number" name="atk-bonus">     Damage/Type: <input type="text" name="damage-type">
+
+          <textarea name="extra-atk-spells">
+          
+          
+          </textarea>
+
+      Finances:
+
+        Copper Pieces: <input type="number" name="cp">    Silver Pieces: <input type="number" name="sp">    Electrum Pieces: <input type="number" name="ep">
+
+                Gold Pieces: <input type="number" name="cp">        Platinum Pieces: <input type="number" name="sp">
+    
+      Equipment:
+            
+        <textarea name="equipment">
+        
+        
+        
+        </textarea>
+
+      Other Proficiencies and Languages:
+
+        <textarea name="proficiencies">
+
+
+
+        </textarea>
+
+      Personality Traits:
+
+        <textarea name="personality-traits">
+
+
+
+        </textarea>
+
+      Ideals:
+
+        <textarea name="ideals">
+
+
+
+        </textarea>
+
+      Bonds:
+
+        <textarea name="bonds">
+
+
+
+        </textarea>
+
+      Flaws:
+
+        <textarea name="flaws">
+
+
+
+        </textarea>
+
+      Features & Traits:
+
+        <textarea name="features-traits">
+
+
+
+
+
+
+
+        </textarea>
 
                   <button id="new-btn" type="submit" value="Character Sheet Created">Create Character Sheet</button>
                   </pre>
@@ -288,7 +387,7 @@
         $gd = htmlspecialchars($row['gid']);
         $r0 = htmlspecialchars($row['cname']);
         $r1 = htmlspecialchars($row['background']);
-        $r2 = htmlspecialchars($row['gender']);
+        $r2 = htmlspecialchars($row['alignment']);
         $r3 = htmlspecialchars($row['race']);
         $r4 = htmlspecialchars($row['class']);
         $r5 = htmlspecialchars($row['level']);
@@ -309,7 +408,7 @@
                 <td>$r1</td>
               </tr>
               <tr>
-                <td>Gender:</td>
+                <td>Alignment:</td>
                 <td>$r2</td>
               </tr>
               <tr>

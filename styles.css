@@ -91,11 +91,11 @@ h1, h2 {
 .container {
     display: block;
     font-size:1.2rem;
-    width: 500px;
-    margin: 0 auto;
+    width: 100%;
 }
 .container-inner {
     display: flex;
+    justify-content: left;
     background-color:lavender
 }
 .searchbar {
