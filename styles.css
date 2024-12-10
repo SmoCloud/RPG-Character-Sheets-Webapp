@@ -35,6 +35,12 @@ input[type="password"] {
     margin: 5px;
     width: 200px;
 }
+textarea {
+    padding: 5px;
+    margin: 5px;
+    height: auto;
+    min-width: 500px;
+}
 button {
     padding: 10px;
     margin: 5px;

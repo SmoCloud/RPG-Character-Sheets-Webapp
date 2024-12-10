@@ -245,121 +245,70 @@
                 <fieldset id="add">
                   <legend>New Character Sheet</legend>
                   <pre>
-             Name: <input type="text" name="cname" required>
+             Name: <input type="text" name="cname" required>                Background: <input type="text" name="background" required>                Alignment: <select name="alignment"><option value="Lgood">Lawful Good</option><option value="Ngood">Neutral Good</option><option value="Cgood">Chaotic Good</option><option value="Lneut">Lawful Neutral</option><option value="Nneut">Neutral Neutral</option><option value="Cneut">Chaotic Neutral</option><option value="Levil">Lawful Evil</option><option value="Nevil">Neutral Evil</option><option value="Cevil">Chaotic Evil</option></select>
 
-       Background: <input type="text" name="background" required>
+             Race: <input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid              Class:  <input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue                     Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output>
+                   <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome                      <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
+                   <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead                     <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
+                                                                     <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
 
-        Alignment: <input type="radio" name="alignment" value="male" required>Male   <input type="radio" name="alignment" value="female">Female   <input type="radio" name="alignment" value="other">Other
+         XP Points: <input type="number" name="xp-points">                         Armor:  <select name="armor-type"><option value="padded">Padded</option><option value="leather">Leather</option><option value="studded">Studded Leather</option>           
+                                                                                            <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
+                                                                                            <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
+                                                                                            <option value="splint">Splint</option><option value="plate">Plate</option>
+                                                                                           </select>                        Inspiration: <input type="checkbox" name="inspiration">
 
-             Race: <input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid
-                   <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome
-                   <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead
+          Strength: <input type="number" name="strength">                     Dexterity: <input type="number" name="dexterity"> 
 
-            Class:  <input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue
-                    <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
-                    <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
-                    <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
+      Constitution: <input type="number" name="constitution">                  Intelligence: <input type="number" name="intelligence">
 
-             Level: <input type="range" id="level" name="level" min="1" max="10"/> <output id="value"></output>
+            Wisdom: <input type="number" name="wisdom">                      Charisma: <input type="number" name="charisma">
 
-         XP Points: <input type="number" name="xp-points">      Inspiration: <input type="checkbox" name="inpiration">
-
-          Strength: <input type="number" name="strength">            Dexterity: <input type="number" name="dexterity"> 
-
-      Constitution: <input type="number" name="constitution">     Intelligence: <input type="number" name="intelligence">
-
-            Wisdom: <input type="number" name="wisdom">               Charisma: <input type="number" name="charisma">
-
-             Armor: <select name="armor-type"><option value="padded">Padded</option><option value="leather">Leather</option><option value="studded">Studded Leather</option>
-            <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
-            <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
-            <option value="splint">Splint</option><option value="plate">Plate</option>
-                  </select>
-
-        Current HP: <input type="number" name="current-hp">     Temporary HP: <input type="number" name="temp-hp">
+        Current HP: <input type="number" name="current-hp">                  Temporary HP: <input type="number" name="temp-hp">
 
           Hit Dice: <input type="number" name="hit-dice">
 
-       Death Saves:
-
-        Successes: <input type="range" id="level" name="save-success" min="0" max="3"/> <output id="value"></output>
-
-        Failures: <input type="range" id="level" name="save-failures" min="0" max="3"/> <output id="value"></output>
+       Death Saves:        Successes: <input type="range" id="level" name="save-success" min="0" max="3"/> <output id="value"></output>                       Failures: <input type="range" id="level" name="save-fail" min="0" max="3"/> <output id="value"></output>
 
       Attacks & Spells:
 
-        Name: <input type="text" name="aname">    ATK Bonus: <input type="number" name="atk-bonus">     Damage/Type: <input type="text" name="damage-type">
+              Name: <input type="text" name="aname">                    ATK Bonus: <input type="number" name="atk-bonus">                Damage/Type: <input type="text" name="dmg-type">
 
-          <textarea name="extra-atk-spells">
-          
-          
-          </textarea>
+                     <textarea name="extra-atk-spells" rows="5" cols="100" style="width: 70%; height: auto;"></textarea>
 
       Finances:
 
-        Copper Pieces: <input type="number" name="cp">    Silver Pieces: <input type="number" name="sp">    Electrum Pieces: <input type="number" name="ep">
+              Copper Pieces: <input type="number" name="cp">            Silver Pieces: <input type="number" name="sp">            Electrum Pieces: <input type="number" name="ep">
 
-                Gold Pieces: <input type="number" name="cp">        Platinum Pieces: <input type="number" name="sp">
+                Gold Pieces: <input type="number" name="gp">          Platinum Pieces: <input type="number" name="pp">
     
       Equipment:
             
-        <textarea name="equipment">
-        
-        
-        
-        </textarea>
+            <textarea name="equipment" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Other Proficiencies and Languages:
 
-        <textarea name="proficiencies">
-
-
-
-        </textarea>
+            <textarea name="proficiencies" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Personality Traits:
 
-        <textarea name="personality-traits">
-
-
-
-        </textarea>
+            <textarea name="personality-traits" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Ideals:
 
-        <textarea name="ideals">
-
-
-
-        </textarea>
+            <textarea name="ideals" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Bonds:
 
-        <textarea name="bonds">
-
-
-
-        </textarea>
+            <textarea name="bonds" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Flaws:
 
-        <textarea name="flaws">
-
-
-
-        </textarea>
+            <textarea name="flaws" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Features & Traits:
 
-        <textarea name="features-traits">
-
-
-
-
-
-
-
-        </textarea>
+            <textarea name="features-traits" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
                   <button id="new-btn" type="submit" value="Character Sheet Created">Create Character Sheet</button>
                   </pre>
@@ -382,15 +331,47 @@
         $result = $pdo->query($query);
       }
       while ($row = $result->fetch()) {
-        $id = htmlspecialchars($row['cid']);
-        $ud = htmlspecialchars($row['uid']);
-        $gd = htmlspecialchars($row['gid']);
-        $r0 = htmlspecialchars($row['cname']);
-        $r1 = htmlspecialchars($row['background']);
-        $r2 = htmlspecialchars($row['alignment']);
-        $r3 = htmlspecialchars($row['race']);
-        $r4 = htmlspecialchars($row['class']);
-        $r5 = htmlspecialchars($row['level']);
+        $id  = htmlspecialchars($row['cid']);
+        $ud  = htmlspecialchars($row['uid']);
+        $gd  = htmlspecialchars($row['gid']);
+        $r0  = htmlspecialchars($row['cname']);
+        $r1  = htmlspecialchars($row['background']);
+        $r2  = htmlspecialchars($row['alignment']);
+        $r3  = htmlspecialchars($row['race']);
+        $r4  = htmlspecialchars($row['class']);
+        $r5  = htmlspecialchars($row['level']);
+        $r6  = htmlspecialchars($row['xp-points']);
+        $r7  = htmlspecialchars($row['armor-type']);
+        $r8  = htmlspecialchars($row['xp-points']);
+        $r9  = htmlspecialchars($row['inspiration']);
+        $r10 = htmlspecialchars($row['strength']);
+        $r11 = htmlspecialchars($row['dexterity']);
+        $r12 = htmlspecialchars($row['constitution']);
+        $r13 = htmlspecialchars($row['intelligence']);
+        $r14 = htmlspecialchars($row['wisdom']);
+        $r15 = htmlspecialchars($row['charisma']);
+        $r16 = htmlspecialchars($row['current-hp']);
+        $r17 = htmlspecialchars($row['temp-hp']);
+        $r18 = htmlspecialchars($row['hit-dice']);
+        $r19 = htmlspecialchars($row['save-success']);
+        $r20 = htmlspecialchars($row['save-fail']);
+        $r21 = htmlspecialchars($row['aname']);
+        $r22 = htmlspecialchars($row['atk-bnus']);
+        $r23 = htmlspecialchars($row['dmg-type']);
+        $r24 = htmlspecialchars($row['extra-atk-spells']);
+        $r25 = htmlspecialchars($row['cp']);
+        $r26 = htmlspecialchars($row['sp']);
+        $r27 = htmlspecialchars($row['ep']);
+        $r28 = htmlspecialchars($row['gp']);
+        $r29 = htmlspecialchars($row['pp']);
+        $r30 = htmlspecialchars($row['equipment']);
+        $r31 = htmlspecialchars($row['proficiencies']);
+        $r32 = htmlspecialchars($row['personality-traits']);
+        $r33 = htmlspecialchars($row['ideals']);
+        $r34 = htmlspecialchars($row['bonds']);
+        $r35 = htmlspecialchars($row['flaws']);
+        $r36 = htmlspecialchars($row['features-traits']);
+
         if((isset($_SESSION['edit']) && isset($_POST['edit'])) && ($_SESSION['edit'] && $_POST['edit'] === $id)) { 
           editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5);
         } else {
@@ -402,26 +383,95 @@
               <tr>
                 <td>Name:</td>
                 <td>$r0</td>
-              </tr>
-              <tr>
                 <td>Background:</td>
                 <td>$r1</td>
-              </tr>
-              <tr>
                 <td>Alignment:</td>
                 <td>$r2</td>
               </tr>
               <tr>
                 <td>Race:</td>
                 <td>$r3</td>
-              </tr>
-              <tr>
                 <td>Class:</td>
                 <td>$r4</td>
-              </tr>
-              <tr>
                 <td>Level:</td>
                 <td>$r5</td>
+              </tr>
+              <tr>
+                <td>XP Points:</td>
+                <td>$r6</td>
+                <td>Armor:</td>
+                <td>$r7</td>
+                <td>Inspiration:</td>
+                <td>$r8</td>
+              </tr>
+              <tr>
+                <td>Strength:</td>
+                <td>$r9</td>
+                <td>Dexterity:</td>
+                <td>$r10</td>
+              </tr>
+              <tr>
+                <td>Constitution:</td>
+                <td>$r11</td>
+                <td>Intelligence:</td>
+                <td>$r12</td>
+              </tr>
+              <tr>
+                <td>Wisdom:</td>
+                <td>$r13</td>
+                <td>Charisma:</td>
+                <td>$r14</td>
+              </tr>
+              <tr>
+                <td>Current HP:</td>
+                <td>$r15</td>
+                <td>Temporary HP:</td>
+                <td>$r16</td>
+              </tr>
+              <tr>
+                <td>Hit Dice:</td>
+                <td>$r17</td>
+                Death Saves:
+                <td>Successes:</td>
+                <td>$r18</td>
+                <td>Failures:</td>
+                <td>$r19</td>
+              </tr>
+              <tr>
+                <td>Hit Dice:</td>
+                <td>$r17</td>
+                Death Saves:
+                <td>Successes:</td>
+                <td>$r18</td>
+                <td>Failures:</td>
+                <td>$r19</td>
+              </tr>
+              <tr>
+                Attack Spells:
+                <td>Name:</td>
+                <td>$r20</td>
+                <td>ATK Bonus:</td>
+                <td>$r21</td>
+                <td>Damage Type:</td>
+                <td>$r22</td>
+              </tr>
+              <tr>
+                Attack Spells:
+                <td>Name:</td>
+                <td>$r20</td>
+                <td>ATK Bonus:</td>
+                <td>$r21</td>
+                <td>Damage Type:</td>
+                <td>$r22</td>
+              </tr>
+              <tr>
+                Attack Spells:
+                <td>Name:</td>
+                <td>$r20</td>
+                <td>ATK Bonus:</td>
+                <td>$r21</td>
+                <td>Damage Type:</td>
+                <td>$r22</td>
               </tr>
             </table>
           </button>
