@@ -449,14 +449,40 @@
         isset($_POST['char-class']) && 
         isset($_POST['level']) &&
         isset($_POST['edit-id'])) {
-        $cname    = $pdo->quote($_POST['cname']);
-        $background      = $pdo->quote($_POST['background']);
-        $user_id  = $pdo->quote($_SESSION['user_id']);
-        $alignment   = $pdo->quote($_POST['alignment']);
-        $race     = $pdo->quote($_POST['race']);
-        $class    = $pdo->quote($_POST['char-class']);
-        $level    = $pdo->quote($_POST['level']);
-        $id       = $pdo->quote($_POST['edit-id']);
+        $id           = $pdo->quote($_POST['edit-id']);
+        $user_id      = $pdo->quote($_SESSION['user_id']);
+        $cname        = $pdo->quote($_POST['cname']);
+        $background   = $pdo->quote($_POST['background']);
+        $alignment    = $pdo->quote($_POST['alignment']);
+        $race         = $pdo->quote($_POST['race']);
+        $class        = $pdo->quote($_POST['char-class']);
+        $level        = $pdo->quote($_POST['level']);
+        $xpp          = $pdo->quote($_POST['xp-points']);
+        $armour       = $pdo->quote($_POST['']);
+        $inspiration  = $pdo->quote($_POST['']);
+        $strength     = $pdo->quote($_POST['']);
+        $dexterity    = $pdo->quote($_POST['']);
+        $constitution = $pdo->quote($_POST['']);
+        $intelligence = $pdo->quote($_POST['']);
+        $wisdom       = $pdo->quote($_POST['']);
+        $charisma     = $pdo->quote($_POST['']);
+        $hpCurrent    = $pdo->quote($_POST['']);
+        $hpTemp       = $pdo->quote($_POST['']);
+        $hitDice      = $pdo->quote($_POST['']);
+        $saveSuccess  = $pdo->quote($_POST['']);
+        $saveFail     = $pdo->quote($_POST['']);
+        $armour       = $pdo->quote($_POST['']);
+        $aname        = $pdo->quote($_POST['']);
+        $atkBns       = $pdo->quote($_POST['']);
+        $dmgType      = $pdo->quote($_POST['']);
+        $armour       = $pdo->quote($_POST['']);
+        $extraAtks    = $pdo->quote($_POST['']);
+        $copper       = $pdo->quote($_POST['']);
+        $silver       = $pdo->quote($_POST['']);
+        $electrum     = $pdo->quote($_POST['']);
+        $gold         = $pdo->quote($_POST['']);
+        $platinum     = $pdo->quote($_POST['']);
+        $equipment    = $pdo->quote($_POST['']);
         
         $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
                       SET cname=$cname, background=$background, alignment=$alignment, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
@@ -595,8 +621,8 @@
         $r3  = htmlspecialchars($row['race']);
         $r4  = htmlspecialchars($row['class']);
         $r5  = htmlspecialchars($row['level']);
-        $r6  = htmlspecialchars($row['xp-points']);
-        $r7  = htmlspecialchars($row['armor-type']);
+        $r6  = htmlspecialchars($row['xp_points']);
+        $r7  = htmlspecialchars($row['armor']);
         $r8  = htmlspecialchars($row['inspiration']);
         $r9  = htmlspecialchars($row['strength']);
         $r10 = htmlspecialchars($row['dexterity']);
@@ -604,27 +630,27 @@
         $r12 = htmlspecialchars($row['intelligence']);
         $r13 = htmlspecialchars($row['wisdom']);
         $r14 = htmlspecialchars($row['charisma']);
-        $r15 = htmlspecialchars($row['current-hp']);
-        $r16 = htmlspecialchars($row['temp-hp']);
-        $r17 = htmlspecialchars($row['hit-dice']);
-        $r18 = htmlspecialchars($row['save-success']);
-        $r19 = htmlspecialchars($row['save-fail']);
-        $r20 = htmlspecialchars($row['aname']);
-        $r21 = htmlspecialchars($row['atk-bnus']);
-        $r22 = htmlspecialchars($row['dmg-type']);
-        $r23 = htmlspecialchars($row['extra-atk-spells']);
+        $r15 = htmlspecialchars($row['current_hp']);
+        $r16 = htmlspecialchars($row['temp_hp']);
+        $r17 = htmlspecialchars($row['hit_dice']);
+        $r18 = htmlspecialchars($row['death_save_success']);
+        $r19 = htmlspecialchars($row['death_save_fail']);
+        $r20 = htmlspecialchars($row['atk_name']);
+        $r21 = htmlspecialchars($row['atk_bonus']);
+        $r22 = htmlspecialchars($row['dmg_type']);
+        $r23 = htmlspecialchars($row['extra_atk_spells']);
         $r24 = htmlspecialchars($row['cp']);
         $r25 = htmlspecialchars($row['sp']);
         $r26 = htmlspecialchars($row['ep']);
         $r27 = htmlspecialchars($row['gp']);
         $r28 = htmlspecialchars($row['pp']);
         $r29 = htmlspecialchars($row['equipment']);
-        $r30 = htmlspecialchars($row['proficiencies']);
-        $r31 = htmlspecialchars($row['personality-traits']);
+        $r30 = htmlspecialchars($row['prof_lang']);
+        $r31 = htmlspecialchars($row['p_traits']);
         $r32 = htmlspecialchars($row['ideals']);
         $r33 = htmlspecialchars($row['bonds']);
         $r34 = htmlspecialchars($row['flaws']);
-        $r35 = htmlspecialchars($row['features-traits']);
+        $r35 = htmlspecialchars($row['f_traits']);
 
         if((isset($_SESSION['edit']) && isset($_POST['edit'])) && ($_SESSION['edit'] && $_POST['edit'] === $id)) { 
           editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35);
@@ -634,7 +660,7 @@
           <form action='gallery.php' method='post'>
           <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
             <table>
-            <tr>
+              <tr>
                 <td>Name:</td>
                 <td>$r0</td>
               </tr>
