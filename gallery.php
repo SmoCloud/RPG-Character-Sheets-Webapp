@@ -17,7 +17,7 @@
     exit;
   }
   # Testing lab computer can change repo
-  function editCharacter($id, $nm, $bg, $a, $rc, $cl, $lvl, $xpp, $ar, $isp, $str, $dex, $ctn, $int, $wis, $chm, $chp, $thp, $hdc, $scc, $fal, $anm, $abn, $dtp, $exs, $cp, $sp, $ep, $gp, $pp, $eqp, $opl, $pst, $idl, $bnd, $flw, $fet) {
+  function editCharacter($id, $nm, $bg, $a, $rc, $cl, $lvl, $xpp, $ar, $isp, $str, $dex, $ctn, $int, $wis, $chm, $chp, $thp, $hdc, $scc, $fal, $anm1, $anm2, $anm3, $abn1, $abn2, $abn3, $dtp1, $dtp2, $dtp3, $exs, $cp, $sp, $ep, $gp, $pp, $eqp, $opl, $pst, $idl, $bnd, $flw, $fet) {
     echo <<<_END
       <div class="homes">
       <form action='gallery.php' method='post'>
@@ -204,12 +204,36 @@
             <td></td>
           </tr>
           <tr>
-            <td>Name:</td>
-            <td><input type="text" name="aname" value="$anm" placeholder="$anm"></td>
-            <td>ATK Bonus:</td>
-            <td><input type="number" name="atk-bonus" value='$abn'></td>
-            <td>Damage Type:</td>
-            <td><input type="text" name="dmg-type" value='$dtp'></td>
+            <td>Name</td>
+            <td></td>
+            <td>ATK Bonus</td>
+            <td></td>
+            <td>Damage Type</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="text" name="aname1" value="$anm1" placeholder="$anm1"></td>
+            <td></td>
+            <td><input type="number" name="atk-bonus1" value='$abn1'></td>
+            <td></td>
+            <td><input type="text" name="dmg-type1" value='$dtp1'></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="text" name="aname2" value="$anm2" placeholder="$anm2"></td>
+            <td></td>
+            <td><input type="number" name="atk-bonus2" value='$abn2'></td>
+            <td></td>
+            <td><input type="text" name="dmg-type2" value='$dtp2'></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="text" name="aname3" value="$anm3" placeholder="$anm3"></td>
+            <td></td>
+            <td><input type="number" name="atk-bonus3" value='$abn3'></td>
+            <td></td>
+            <td><input type="text" name="dmg-type3" value='$dtp3'></td>
           </tr>
           <tr>
             <td></td>
@@ -520,23 +544,23 @@
     }
     if ((isset($_POST['create-sheet']) && $_POST['create-sheet']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery']))) {
       echo <<<_END
-            <div class="container">
-              <form action="gallery.php" method="post" autocomplete="off">
-                <fieldset id="add">
-                  <legend>New Character Sheet</legend>
-                  <pre>
-             Name: <input type="text" name="cname" required>                Background: <input type="text" name="background" required>                Alignment: <select name="alignment"><option value="Lawful Good">Lawful Good</option><option value="Neutral Good">Neutral Good</option><option value="Chaotic Good">Chaotic Good</option><option value="Lawful Neutral">Lawful Neutral</option><option value="Neutral Neutral">Neutral Neutral</option><option value="Chaotic Neutral">Chaotic Neutral</option><option value="Lawful Evil">Lawful Evil</option><option value="Neutral Evil">Neutral Evil</option><option value="Chaotic Evil">Chaotic Evil</option></select>
+      <div class="container">
+        <form action="gallery.php" method="post" autocomplete="off">
+          <fieldset id="add">
+            <legend>New Character Sheet</legend>
+            <pre>
+      Name: <input type="text" name="cname" required>              Background: <input type="text" name="background" required>             Alignment: <select name="alignment"><option value="Lawful Good">Lawful Good</option><option value="Neutral Good">Neutral Good</option><option value="Chaotic Good">Chaotic Good</option><option value="Lawful Neutral">Lawful Neutral</option><option value="Neutral Neutral">Neutral Neutral</option><option value="Chaotic Neutral">Chaotic Neutral</option><option value="Lawful Evil">Lawful Evil</option><option value="Neutral Evil">Neutral Evil</option><option value="Chaotic Evil">Chaotic Evil</option></select>
 
-             Race: <input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid              Class:  <input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue                     Level: <input type="range" id="level" name="level" min="1" max="20"/> <output id="value"></output>
-                   <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome                      <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
-                   <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead                     <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
-                                                                     <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
+      Race: <input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid           Class:  <input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue              Level: <input type="range" id="level" name="level" min="1" max="20"/> <output id="value"></output>
+            <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome                   <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
+            <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead                  <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
+                                                           <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
 
          XP Points: <input type="number" name="xp-points">                         Armor:  <select name="armor-type"><option value="padded">Padded</option><option value="leather">Leather</option><option value="studded">Studded Leather</option>           
-                                                                                            <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
-                                                                                            <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
-                                                                                            <option value="splint">Splint</option><option value="plate">Plate</option>
-                                                                                           </select>                        Inspiration: <input type="checkbox" name="inspiration">
+                                                                                      <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
+                                                                                      <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
+                                                                                      <option value="splint">Splint</option><option value="plate">Plate</option>
+                                                                                      </select>                    Inspiration: <input type="checkbox" name="inspiration">
 
           Strength: <input type="number" name="strength">                     Dexterity: <input type="number" name="dexterity"> 
 
@@ -551,8 +575,10 @@
        Death Saves:        Successes: <input type="range" id="level" name="save-success" min="0" max="3"/> <output id="value"></output>                       Failures: <input type="range" id="level" name="save-fail" min="0" max="3"/> <output id="value"></output>
 
       Attacks & Spells:
-
-              Name: <input type="text" name="aname">                    ATK Bonus: <input type="number" name="atk-bonus">                Damage/Type: <input type="text" name="dmg-type">
+                  Name                                  ATK Bonus                        Damage Type
+          <input type="text" name="aname1">                    <input type="number" name="atk-bonus1">                <input type="text" name="dmg-type1">
+          <input type="text" name="aname2">                    <input type="number" name="atk-bonus2">                <input type="text" name="dmg-type2">
+          <input type="text" name="aname3">                    <input type="number" name="atk-bonus3">                <input type="text" name="dmg-type3">
       
       Extra Spells:
                      <textarea name="extra-atk-spells" rows="5" cols="100" style="width: 70%; height: auto;"></textarea>
@@ -635,25 +661,31 @@
         $r17 = htmlspecialchars($row['hit_dice']);
         $r18 = htmlspecialchars($row['death_save_success']);
         $r19 = htmlspecialchars($row['death_save_fail']);
-        $r20 = htmlspecialchars($row['atk_name']);
-        $r21 = htmlspecialchars($row['atk_bonus']);
-        $r22 = htmlspecialchars($row['dmg_type']);
-        $r23 = htmlspecialchars($row['extra_atk_spells']);
-        $r24 = htmlspecialchars($row['cp']);
-        $r25 = htmlspecialchars($row['sp']);
-        $r26 = htmlspecialchars($row['ep']);
-        $r27 = htmlspecialchars($row['gp']);
-        $r28 = htmlspecialchars($row['pp']);
-        $r29 = htmlspecialchars($row['equipment']);
-        $r30 = htmlspecialchars($row['prof_lang']);
-        $r31 = htmlspecialchars($row['p_traits']);
-        $r32 = htmlspecialchars($row['ideals']);
-        $r33 = htmlspecialchars($row['bonds']);
-        $r34 = htmlspecialchars($row['flaws']);
-        $r35 = htmlspecialchars($row['f_traits']);
+        $r20 = htmlspecialchars($row['atk_name1']);
+        $r21 = htmlspecialchars($row['atk_bonus1']);
+        $r22 = htmlspecialchars($row['dmg_type1']);
+        $r23 = htmlspecialchars($row['atk_name2']);
+        $r24 = htmlspecialchars($row['atk_bonus2']);
+        $r25 = htmlspecialchars($row['dmg_type1']);
+        $r26 = htmlspecialchars($row['atk_name3']);
+        $r27 = htmlspecialchars($row['atk_bonus3']);
+        $r28 = htmlspecialchars($row['dmg_type3']);
+        $r29 = htmlspecialchars($row['extra_atk_spells']);
+        $r30 = htmlspecialchars($row['cp']);
+        $r31 = htmlspecialchars($row['sp']);
+        $r32 = htmlspecialchars($row['ep']);
+        $r33 = htmlspecialchars($row['gp']);
+        $r34 = htmlspecialchars($row['pp']);
+        $r35 = htmlspecialchars($row['equipment']);
+        $r36 = htmlspecialchars($row['prof_lang']);
+        $r37 = htmlspecialchars($row['p_traits']);
+        $r38 = htmlspecialchars($row['ideals']);
+        $r39 = htmlspecialchars($row['bonds']);
+        $r40 = htmlspecialchars($row['flaws']);
+        $r41 = htmlspecialchars($row['f_traits']);
 
         if((isset($_SESSION['edit']) && isset($_POST['edit'])) && ($_SESSION['edit'] && $_POST['edit'] === $id)) { 
-          editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35);
+          editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35, $r36, $r37, $r38, $r39, $r40, $r41);
         } else {
           echo <<<_END
           <div class="homes">
