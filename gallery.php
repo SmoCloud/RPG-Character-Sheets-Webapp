@@ -17,7 +17,7 @@
     exit;
   }
   # Testing lab computer can change repo
-  function editCharacter($id, $nm, $bg, $a, $rc, $cl, $lvl, $xpp, $ar, $isp, $str, $dex, $ctn, $int, $wis, $chm, $chp, $thp, $hdc, $scc, $fal, $anm1, $anm2, $anm3, $abn1, $abn2, $abn3, $dtp1, $dtp2, $dtp3, $exs, $cp, $sp, $ep, $gp, $pp, $eqp, $opl, $pst, $idl, $bnd, $flw, $fet) {
+  function editCharacter($id, $nm, $bg, $a, $rc, $cl, $lvl, $xpp, $ar, $str, $dex, $ctn, $int, $wis, $chm, $chp, $thp, $hdc, $scc, $fal, $anm1, $anm2, $anm3, $abn1, $abn2, $abn3, $dtp1, $dtp2, $dtp3, $exs, $cp, $sp, $ep, $gp, $pp, $eqp, $opl, $pst, $idl, $bnd, $flw, $fet) {
     echo <<<_END
       <div class="homes">
       <form action='gallery.php' method='post'>
@@ -153,7 +153,7 @@
     echo ' value="plate">Plate</option></select></td>';
     echo <<<_END
             <td>Inspiration:</td>
-            <td><input type="checkbox" name="inspiration" value='$isp'/></td>
+            <td><input type="checkbox" name="inspiration" value='1'/></td>
           </tr>
           <tr>
             <td>Strength:</td>
@@ -472,7 +472,26 @@
         isset($_POST['race']) &&
         isset($_POST['char-class']) && 
         isset($_POST['level']) &&
-        isset($_POST['edit-id'])) {
+        isset($_POST['edit-id']) && 
+        isset($_POST{''})) && 
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) &&
+        isset($_POST{''})) && {
         $id           = $pdo->quote($_POST['edit-id']);
         $user_id      = $pdo->quote($_SESSION['user_id']);
         $cname        = $pdo->quote($_POST['cname']);
@@ -482,54 +501,107 @@
         $class        = $pdo->quote($_POST['char-class']);
         $level        = $pdo->quote($_POST['level']);
         $xpp          = $pdo->quote($_POST['xp-points']);
-        $armour       = $pdo->quote($_POST['']);
-        $inspiration  = $pdo->quote($_POST['']);
-        $strength     = $pdo->quote($_POST['']);
-        $dexterity    = $pdo->quote($_POST['']);
-        $constitution = $pdo->quote($_POST['']);
-        $intelligence = $pdo->quote($_POST['']);
-        $wisdom       = $pdo->quote($_POST['']);
-        $charisma     = $pdo->quote($_POST['']);
-        $hpCurrent    = $pdo->quote($_POST['']);
-        $hpTemp       = $pdo->quote($_POST['']);
-        $hitDice      = $pdo->quote($_POST['']);
-        $saveSuccess  = $pdo->quote($_POST['']);
-        $saveFail     = $pdo->quote($_POST['']);
-        $armour       = $pdo->quote($_POST['']);
-        $aname        = $pdo->quote($_POST['']);
-        $atkBns       = $pdo->quote($_POST['']);
-        $dmgType      = $pdo->quote($_POST['']);
-        $armour       = $pdo->quote($_POST['']);
-        $extraAtks    = $pdo->quote($_POST['']);
-        $copper       = $pdo->quote($_POST['']);
-        $silver       = $pdo->quote($_POST['']);
-        $electrum     = $pdo->quote($_POST['']);
-        $gold         = $pdo->quote($_POST['']);
-        $platinum     = $pdo->quote($_POST['']);
-        $equipment    = $pdo->quote($_POST['']);
+        $armor        = $pdo->quote($_POST['armor-type']);
+        $inspiration  = $pdo->quote($_POST['inspiration']);
+        $strength     = $pdo->quote($_POST['strength']);
+        $dexterity    = $pdo->quote($_POST['dexterity']);
+        $constitution = $pdo->quote($_POST['constitution']);
+        $intelligence = $pdo->quote($_POST['intelligence']);
+        $wisdom       = $pdo->quote($_POST['wisdom']);
+        $charisma     = $pdo->quote($_POST['charisma']);
+        $hpCurrent    = $pdo->quote($_POST['current-hp']);
+        $hpTemp       = $pdo->quote($_POST['temp-hp']);
+        $hitDice      = $pdo->quote($_POST['hit-dice']);
+        $saveSuccess  = $pdo->quote($_POST['save-success']);
+        $saveFail     = $pdo->quote($_POST['save-fail']);
+        $aname1       = $pdo->quote($_POST['aname1']);
+        $atkBns1      = $pdo->quote($_POST['atk-bonus1']);
+        $dmgType1     = $pdo->quote($_POST['dmg-type1']);
+        $aname2       = $pdo->quote($_POST['aname2']);
+        $atkBns2      = $pdo->quote($_POST['atk-bonus2']);
+        $dmgType2     = $pdo->quote($_POST['dmg-type2']);
+        $aname3       = $pdo->quote($_POST['aname3']);
+        $atkBns3      = $pdo->quote($_POST['atk-bonus3']);
+        $dmgType3     = $pdo->quote($_POST['dmg-type3']);
+        $extraSpells  = $pdo->quote($_POST['extra-atk-spells']);
+        $copper       = $pdo->quote($_POST['cp']);
+        $silver       = $pdo->quote($_POST['sp']);
+        $electrum     = $pdo->quote($_POST['ep']);
+        $gold         = $pdo->quote($_POST['gp']);
+        $platinum     = $pdo->quote($_POST['pp']);
+        $equipment    = $pdo->quote($_POST['equipment']);
+        $profLang     = $pdo->quote($_POST['proficiencies']);
+        $pTraits      = $pdo->quote($_POST['personality-traits']);
+        $ideals       = $pdo->quote($_POST['ideals']);
+        $bonds        = $pdo->quote($_POST['bonds']);
+        $flaws        = $pdo->quote($_POST['flaws']);
+        $fTraits      = $pdo->quote($_POST['features-traits']);
         
-        $query    = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
-                      SET cname=$cname, background=$background, alignment=$alignment, race=$race, class=$class, level=$level WHERE cid=$id AND uid=$user_id";
+        $query        = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
+                      SET cname=$cname, background=$background, alignment=$alignment, race=$race, class=$class, level=$level,
+                      xp_points=$xpp, armor=$armor, inspiration=$inspiration, strength=$strength, dexterity=$dexterity, constitution=$constitution,
+                      intelligence=$intelligence, wisdom=$wisdom, charisma=$charisma, current_hp=$hpCurrent, temp_hp=$hpTemp, hit_dice=$hitDice,
+                      death_save_success=$saveSuccess, death_save_fail=$saveFail, atk_name1=$aname1, atk_bonus1=$atkBns1, dmg_type1=$dmgType1,
+                      atk_name2=$aname2, atk_bonus2=$atkBns2, dmg_type2=$dmgType2, atk_name3=$aname3, atk_bonus3=$atkBns3, dmg_type3=$dmgType3,
+                      extra_atk_spells=$extraSpells, cp=$copper, sp=$silver, ep=$electrum, gp=$gold, pp=$platinum, equipment=$equipment, prof_lang=$profLang, p_traits=$pTraits,
+                      ideals=$ideals, bonds=$bonds, flaws=$flaws, f_traits=$fTraits WHERE cid=$id AND uid=$user_id";
+
         $result = $pdo->query($query);
         echo "<h4>Character ".$cname." updated in ".$username."'s Gallery.</h4>";
       }
     }
     elseif (!isset($_POST['update']) && 
-        isset($_POST['cname'])   &&
-        isset($_POST['background']) &&
-        isset($_POST['alignment']) &&
-        isset($_POST['race']) &&
-        isset($_POST['char-class']) && 
-        isset($_POST['level'])) {
-      $username = $_SESSION['username'];
-      $cname    = $pdo->quote($_POST['cname']);
-      $user_id  = $pdo->quote($_SESSION['user_id']);
-      $game_id  = $pdo->quote($_SESSION['game_id']);
-      $background      = $pdo->quote($_POST['background']);
-      $alignment   = $pdo->quote($_POST['alignment']);
-      $race     = $pdo->quote($_POST['race']);
-      $class    = $pdo->quote($_POST['char-class']);
-      $level    = $pdo->quote($_POST['level']);
+      isset($_POST['cname'])   &&
+      isset($_POST['background']) &&
+      isset($_POST['alignment']) &&
+      isset($_POST['race']) &&
+      isset($_POST['char-class']) && 
+      isset($_POST['level'])) {
+      $username         = $_SESSION['username'];
+      $cname            = $pdo->quote($_POST['cname']);
+      $user_id          = $pdo->quote($_SESSION['user_id']);
+      $game_id          = $pdo->quote($_SESSION['game_id']);
+      $background       = $pdo->quote($_POST['background']);
+      $alignment        = $pdo->quote($_POST['alignment']);
+      $race             = $pdo->quote($_POST['race']);
+      $class            = $pdo->quote($_POST['char-class']);
+      $level            = $pdo->quote($_POST['level']);
+      $xpp          = $pdo->quote($_POST['xp-points']);
+      $armor       = $pdo->quote($_POST['armor-type']);
+      $inspiration  = $pdo->quote($_POST['inspiration']);
+      $strength     = $pdo->quote($_POST['strength']);
+      $dexterity    = $pdo->quote($_POST['dexterity']);
+      $constitution = $pdo->quote($_POST['constitution']);
+      $intelligence = $pdo->quote($_POST['intelligence']);
+      $wisdom       = $pdo->quote($_POST['wisdom']);
+      $charisma     = $pdo->quote($_POST['charisma']);
+      $hpCurrent    = $pdo->quote($_POST['current-hp']);
+      $hpTemp       = $pdo->quote($_POST['temp-hp']);
+      $hitDice      = $pdo->quote($_POST['hit-dice']);
+      $saveSuccess  = $pdo->quote($_POST['save-success']);
+      $saveFail     = $pdo->quote($_POST['save-fail']);
+      $aname1       = $pdo->quote($_POST['aname1']);
+      $atkBns1      = $pdo->quote($_POST['atk-bonus1']);
+      $dmgType1     = $pdo->quote($_POST['dmg-type1']);
+      $aname2       = $pdo->quote($_POST['aname2']);
+      $atkBns2      = $pdo->quote($_POST['atk-bonus2']);
+      $dmgType2     = $pdo->quote($_POST['dmg-type2']);
+      $aname3       = $pdo->quote($_POST['aname3']);
+      $atkBns3      = $pdo->quote($_POST['atk-bonus3']);
+      $dmgType3     = $pdo->quote($_POST['dmg-type3']);
+      $extraSpells  = $pdo->quote($_POST['extra-atk-spells']);
+      $copper       = $pdo->quote($_POST['cp']);
+      $silver       = $pdo->quote($_POST['sp']);
+      $electrum     = $pdo->quote($_POST['ep']);
+      $gold         = $pdo->quote($_POST['gp']);
+      $platinum     = $pdo->quote($_PSOT['pp']);
+      $equipment    = $pdo->quote($_POST['equipment']);
+      $profLang     = $pdo->quote($_POST['proficiencies']);
+      $pTraits      = $pdo->quote($_POST['personality-traits']);
+      $ideals       = $pdo->quote($_POST['ideals']);
+      $bonds        = $pdo->quote($_POST['bonds']);
+      $flaws        = $pdo->quote($_POST['flaws']);
+      $fTraits      = $pdo->quote($_POST['features-traits']);
 
       $pdf_data = [
         'ClassLevel' => $_POST['char-class'].' - '.$_POST['level'],
@@ -538,7 +610,12 @@
         'Race' => $_POST['race']
       ];
       
-      $query    = "INSERT INTO char_sheets (cname, uid, gid, background, alignment, race, class, level) VALUES ($cname, $user_id, $game_id, $background, $alignment, $race, $class, $level)";
+      $query            = "INSERT INTO char_sheets (cname, uid, gid, background, alignment, race, class, level, xp_points, armor, inspiration, strength, dexterity,
+                        constitution, intelligence, wisdom, charisma, current_hp, temp_hp, hit_dice, death_save_success, death_save_fail, atk_name1, atk_bonus1, dmg_type1,
+                        atk_name2, atk_bonus2, dmg_type2, atk_name3, atk_bonus3, dmg_type3, extra_atk_spells, cp, sp, ep, gp, pp, equipment, prof_lang, p_traits, 
+                        ideals, bonds, flaws, f_traits) VALUES ($cname, $user_id, $game_id, $background, $alignment, $race, $class, $level, $xpp, $armor, $inspiration, 
+                        $strength, $dexterity, $constitution, $intelligence, $wisdom, $charisma, $hpCurrent, $hpTemp, $hitDice, $saveSuccess, $saveFail, $aname1, $atkBns1, $dmgType1,
+                        $aname2, $atkBns2, $dmgType2, $aname3, $atkBns3, $dmgType3, $extraSpells, $cp, $sp, $ep, $gp, $pp, $equipment, $profLang, $pTraits, $ideals, $bonds, $flaws, $fTraits)";
       $result = $pdo->query($query);
       echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
     }
@@ -560,7 +637,7 @@
                                                                                       <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
                                                                                       <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
                                                                                       <option value="splint">Splint</option><option value="plate">Plate</option>
-                                                                                      </select>                    Inspiration: <input type="checkbox" name="inspiration">
+                                                                                      </select>                    Inspiration: <input type="checkbox" name="inspiration" value="1">
 
           Strength: <input type="number" name="strength">                     Dexterity: <input type="number" name="dexterity"> 
 
@@ -666,7 +743,7 @@
         $r22 = htmlspecialchars($row['dmg_type1']);
         $r23 = htmlspecialchars($row['atk_name2']);
         $r24 = htmlspecialchars($row['atk_bonus2']);
-        $r25 = htmlspecialchars($row['dmg_type1']);
+        $r25 = htmlspecialchars($row['dmg_type2']);
         $r26 = htmlspecialchars($row['atk_name3']);
         $r27 = htmlspecialchars($row['atk_bonus3']);
         $r28 = htmlspecialchars($row['dmg_type3']);
@@ -685,7 +762,7 @@
         $r41 = htmlspecialchars($row['f_traits']);
 
         if((isset($_SESSION['edit']) && isset($_POST['edit'])) && ($_SESSION['edit'] && $_POST['edit'] === $id)) { 
-          editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35, $r36, $r37, $r38, $r39, $r40, $r41);
+          editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35, $r36, $r37, $r38, $r39, $r40, $r41);
         } else {
           echo <<<_END
           <div class="homes">
