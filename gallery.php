@@ -471,27 +471,44 @@
         isset($_POST['alignment']) &&
         isset($_POST['race']) &&
         isset($_POST['char-class']) && 
-        isset($_POST['level']) &&
-        isset($_POST['edit-id']) && 
-        isset($_POST{''})) && 
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) &&
-        isset($_POST{''})) && {
+        isset($_POST['level']) && 
+        isset($_POST['xp-points']) && 
+        isset($_POST['armor-type']) &&
+        isset($_POST['inspiration']) &&
+        isset($_POST['strength']) &&
+        isset($_POST['dexterity']) &&
+        isset($_POST['constitution']) &&
+        isset($_POST['intelligence']) &&
+        isset($_POST['wisdom']) &&
+        isset($_POST['charisma']) &&
+        isset($_POST['current-hp']) &&
+        isset($_POST['temp-hp']) &&
+        isset($_POST['hit-dice']) &&
+        isset($_POST['save-success']) &&
+        isset($_POST['save-fail']) &&
+        isset($_POST['aname1']) &&
+        isset($_POST['atk-bonus1']) &&
+        isset($_POST['dmg-type1']) &&
+        isset($_POST['aname2']) &&
+        isset($_POST['atk-bonus2']) &&
+        isset($_POST['dmg-type2']) &&
+        isset($_POST['aname3']) &&
+        isset($_POST['atk-bonus3']) &&
+        isset($_POST['dmg-type3']) &&
+        isset($_POST['extra-atk-spells']) &&
+        isset($_POST['cp']) &&
+        isset($_POST['sp']) &&
+        isset($_POST['ep']) &&
+        isset($_POST['gp']) &&
+        isset($_POST['pp']) &&
+        isset($_POST['equipment']) &&
+        isset($_POST['proficiencies']) &&
+        isset($_POST['personality-traits']) &&
+        isset($_POST['ideals']) &&
+        isset($_POST['bonds']) &&
+        isset($_POST['flaws']) &&
+        isset($_POST['features-traits']) &&
+        isset($_POST['edit-id'])) {
         $id           = $pdo->quote($_POST['edit-id']);
         $user_id      = $pdo->quote($_SESSION['user_id']);
         $cname        = $pdo->quote($_POST['cname']);
@@ -502,6 +519,11 @@
         $level        = $pdo->quote($_POST['level']);
         $xpp          = $pdo->quote($_POST['xp-points']);
         $armor        = $pdo->quote($_POST['armor-type']);
+        if ($_POST['inspiration'] === '') {
+          $_POST['inspiration'] = 0;
+        } else {
+          $_POST['inspiration'] = 1;
+        }
         $inspiration  = $pdo->quote($_POST['inspiration']);
         $strength     = $pdo->quote($_POST['strength']);
         $dexterity    = $pdo->quote($_POST['dexterity']);
@@ -515,12 +537,27 @@
         $saveSuccess  = $pdo->quote($_POST['save-success']);
         $saveFail     = $pdo->quote($_POST['save-fail']);
         $aname1       = $pdo->quote($_POST['aname1']);
+        if (empty($_POST['atk-bonus1'])) {
+          $_POST['atk-bonus1']  = 0;
+        } else {
+          $_POST['atk-bonus1']    = 1;
+        }
         $atkBns1      = $pdo->quote($_POST['atk-bonus1']);
         $dmgType1     = $pdo->quote($_POST['dmg-type1']);
         $aname2       = $pdo->quote($_POST['aname2']);
+        if (empty($_POST['atk-bonus2'])) {
+          $_POST['atk-bonus2']    = 0;
+        } else {
+          $_POST['atk-bonus2']    = 1;
+        }
         $atkBns2      = $pdo->quote($_POST['atk-bonus2']);
         $dmgType2     = $pdo->quote($_POST['dmg-type2']);
         $aname3       = $pdo->quote($_POST['aname3']);
+        if (empty($_POST['atk-bonus3'])) {
+          $_POST['atk-bonus3']    = 0;
+        } else {
+          $_POST['atk-bonus3']    = 1;
+        }
         $atkBns3      = $pdo->quote($_POST['atk-bonus3']);
         $dmgType3     = $pdo->quote($_POST['dmg-type3']);
         $extraSpells  = $pdo->quote($_POST['extra-atk-spells']);
@@ -770,238 +807,196 @@
           <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
             <table>
               <tr>
-                <td>Name:</td>
-                <td>$r0</td>
+                <td>
+                  <table id="stats">
+                    <tr>
+                      <td>Name:</td>
+                      <td>$r0</td>
+                    </tr>
+                    <tr>
+                      <td>Background:</td>
+                      <td>$r1</td>
+                      <td>Alignment:</td>
+                      <td>$r2</td>
+                      <td>Race:</td>
+                      <td>$r3</td>
+                    </tr>
+                    <tr>
+                      <td>Class:</td>
+                      <td>$r4</td>
+                      <td>Level:</td>
+                      <td>$r5</td>
+                      <td>XP Points:</td>
+                      <td>$r6</td>
+                    </tr>
+                    <tr>
+                      <td>Armor:</td>
+                      <td>$r7</td>
+                      <td>Inspiration:</td>
+                      <td>$r8</td>
+                    </tr>
+                    <tr>
+                      <td>Strength:</td>
+                      <td>$r9</td>
+                      <td>Dexterity:</td>
+                      <td>$r10</td>
+                    </tr>
+                    <tr>
+                      <td>Constitution:</td>
+                      <td>$r11</td>
+                      <td>Intelligence:</td>
+                      <td>$r12</td>
+                    </tr>
+                    <tr>
+                      <td>Wisdom:</td>
+                      <td>$r13</td>
+                      <td>Charisma:</td>
+                      <td>$r14</td>
+                    </tr>
+                    <tr>
+                      <td>Current HP:</td>
+                      <td>$r15</td>
+                      <td>Temporary HP:</td>
+                      <td>$r16</td>
+                    </tr>
+                    <tr>
+                      <td>Hit Dice:</td>
+                      <td>$r17</td>
+                      <td>Death Saves:</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>Successes:</td>
+                      <td>$r18</td>
+                      <td>Failures:</td>
+                      <td>$r19</td>
+                    </tr>
+                    <tr>
+                      <td>Attack Spells:</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Name:</td>
+                      <td>$r20</td>
+                      <td>ATK Bonus:</td>
+                      <td>$r21</td>
+                      <td>Damage Type:</td>
+                      <td>$r22</td>
+                    </tr>
+                    <tr>
+                      <td>Name:</td>
+                      <td>$r23</td>
+                      <td>ATK Bonus:</td>
+                      <td>$r24</td>
+                      <td>Damage Type:</td>
+                      <td>$r25</td>
+                    </tr>
+                    <tr>
+                      <td>Name:</td>
+                      <td>$r26</td>
+                      <td>ATK Bonus:</td>
+                      <td>$r27</td>
+                      <td>Damage Type:</td>
+                      <td>$r28</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>Extra Attack Spells:</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>$r29</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>Finances:</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Copper pieces:</td>
+                      <td>$r30</td>
+                      <td>Silver pieces:</td>
+                      <td>$r31</td>
+                      <td>Electrum Pieces:</td>
+                      <td>$r32</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Pieces:</td>
+                      <td>$r33</td>
+                      <td>Platinum Pieces:</td>
+                      <td>$r34</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </td>
               </tr>
               <tr>
-                <td>Background:</td>
-                <td>$r1</td>
-                <td>Alignment:</td>
-                <td>$r2</td>
-                <td>Race:</td>
-                <td>$r3</td>
-              </tr>
-              <tr>
-                <td>Class:</td>
-                <td>$r4</td>
-                <td>Level:</td>
-                <td>$r5</td>
-                <td>XP Points:</td>
-                <td>$r6</td>
-              </tr>
-              <tr>
-                <td>Armor:</td>
-                <td>$r7</td>
-                <td>Inspiration:</td>
-                <td>$r8</td>
-              </tr>
-              <tr>
-                <td>Strength:</td>
-                <td>$r9</td>
-                <td>Dexterity:</td>
-                <td>$r10</td>
-              </tr>
-              <tr>
-                <td>Constitution:</td>
-                <td>$r11</td>
-                <td>Intelligence:</td>
-                <td>$r12</td>
-              </tr>
-              <tr>
-                <td>Wisdom:</td>
-                <td>$r13</td>
-                <td>Charisma:</td>
-                <td>$r14</td>
-              </tr>
-              <tr>
-                <td>Current HP:</td>
-                <td>$r15</td>
-                <td>Temporary HP:</td>
-                <td>$r16</td>
-              </tr>
-              <tr>
-                <td>Hit Dice:</td>
-                <td>$r17</td>
-                <td>Death Saves:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>Successes:</td>
-                <td>$r18</td>
-                <td>Failures:</td>
-                <td>$r19</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Attack Spells:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Name:</td>
-                <td>$r20</td>
-                <td>ATK Bonus:</td>
-                <td>$r21</td>
-                <td>Damage Type:</td>
-                <td>$r22</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Extra Attack Spells:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r23</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Finances:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Copper pieces:</td>
-                <td>$r24</td>
-                <td>Silver pieces:</td>
-                <td>$r25</td>
-                <td>Electrum Pieces:</td>
-                <td>$r26</td>
-              </tr>
-              <tr>
-                <td>Gold Pieces:</td>
-                <td>$r27</td>
-                <td>Platinum Pieces:</td>
-                <td>$r28</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Equipment:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r29</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Other Proficieincies and Languages:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r30</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Personality Traits:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r31</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Ideals:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r32</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Bonds:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r33</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Flaws:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r34</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Features and Traits:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>$r35</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <table id="info">
+                    <tr>
+                      <td>Equipment:</td>
+                    </tr>
+                    <tr>
+                      <td>$r35</td>
+                    </tr>
+                    <tr>
+                      <td>Other Proficieincies and Languages:</td>
+                    </tr>
+                    <tr>
+                      <td>$r36</td>
+                    </tr>
+                    <tr>
+                      <td>Personality Traits:</td>
+                    </tr>
+                    <tr>
+                      <td>$r37</td>
+                    </tr>
+                    <tr>
+                      <td>Ideals:</td>
+                    </tr>
+                    <tr>
+                      <td>$r38</td>
+                    </tr>
+                    <tr>
+                      <td>Bonds:</td>
+                    </tr>
+                    <tr>
+                      <td>$r39</td>
+                    </tr>
+                    <tr>
+                      <td>Flaws:</td>
+                    </tr>
+                    <tr>
+                      <td>$r40</td>
+                    </tr>
+                    <tr>
+                      <td>Features and Traits:</td>
+                    </tr>
+                    <tr>
+                      <td>$r41</td>
+                    </tr>
+                  </table>
+                </td>
               </tr>
             </table>
           </button>
