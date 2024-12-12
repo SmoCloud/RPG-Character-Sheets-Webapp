@@ -196,7 +196,7 @@
           </tr>
           <tr>
             <td>Hit Dice:</td>
-            <td><input type="number" name="hit-dice" value='$hdc'/></td>
+            <td>$hdc</td>
             <td>Death Saves:</td>
             <td></td>
             <td></td>
@@ -629,7 +629,6 @@
       $charisma     = $pdo->quote($_POST['charisma']);
       $hpCurrent    = $pdo->quote($_POST['current-hp']);
       $hpTemp       = $pdo->quote($_POST['temp-hp']);
-      $hitDice      = $pdo->quote($_POST['hit-dice']);
       $saveSuccess  = $pdo->quote($_POST['save-success']);
       $saveFail     = $pdo->quote($_POST['save-fail']);
       $aname1       = $pdo->quote($_POST['aname1']);
@@ -654,6 +653,59 @@
       $bonds        = $pdo->quote($_POST['bonds']);
       $flaws        = $pdo->quote($_POST['flaws']);
       $fTraits      = $pdo->quote($_POST['features-traits']);
+
+      
+
+        // stats that are calculated from other input stats (not determined by player input, but as a byproduct of other stats and/or abilities)
+        $strMod = (int)(($r9 - 10) / 2);
+        $dexMod = (int)(($r10 - 10) / 2);
+        $conMod = (int)(($r11 - 10) / 2);
+        $intMod = (int)(($r12 - 10) / 2);
+        $wisMod = (int)(($r13 - 10) / 2);
+        $chmMod = (int)(($r14 - 10) / 2);
+
+        $hitDice;
+
+        switch ($r4):
+          case 'artificer':
+            $hitDice = "d8";
+            break;
+          case 'barbarian':
+            $hitDice = "d12";
+            break;
+          case 'bard':
+            $hitDice = "d8";
+            break;
+          case 'cleric':
+            $hitDice = "d8";
+            break;
+          case 'druid':
+            $hitDice = "d8";
+            break;
+          case 'fighter':
+            $hitDice = "d10";
+            break;
+          case 'monk':
+            $hitDice = "d8";
+            break;
+          case 'paladin':
+            $hitDice = "d10";
+            break;
+          case 'ranger':
+            $hitDice = "d10";
+            break;
+          case 'rogue':
+            $hitDice = "d8";
+            break;
+          case 'sorcerer':
+            $hitDice = "d6";
+            break;
+          case 'warlock':
+            $hitDice = "d8";
+            break;
+          case 'wizard':
+            $hitDice = "d6";
+            break;
 
       $pdf_data = [
         'ClassLevel' => $_POST['char-class'].' - '.$_POST['level'],
@@ -698,8 +750,6 @@
             Wisdom: <input type="number" name="wisdom">                      Charisma: <input type="number" name="charisma">
 
         Current HP: <input type="number" name="current-hp">                  Temporary HP: <input type="number" name="temp-hp">
-
-          Hit Dice: <input type="number" name="hit-dice">
 
        Death Saves:        Successes: <input type="range" id="level" name="save-success" min="0" max="3"/> <output id="value"></output>                       Failures: <input type="range" id="level" name="save-fail" min="0" max="3"/> <output id="value"></output>
 
