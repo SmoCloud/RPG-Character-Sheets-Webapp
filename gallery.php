@@ -94,28 +94,43 @@
             <td>Class:</td>
           <td><select name='char-class' value='$cl'>
       <option ";
-    if($cl === "fighter") {echo "selected='selected'";}
-    echo "value='fighter'>Fighter</option>";
-    echo "<option ";
-    if($cl === "rogue") {echo "selected='selected'";}
-    echo "value='rogue'>Rogue</option>";
-    echo "<option ";
-    if($cl === "assassin") {echo "selected='selected'";}
-    echo "value='assassin'>Assassin</option>";
-    echo "<option ";
-    if($cl === "merchant") {echo "selected='selected'";}
-    echo "value='merchant'>Merchant</option>";
-    if($cl === "ranger") {echo "selected='selected'";}
-    echo "value='ranger'>Ranger</option>";
+    if($cl === "artificer") {echo "selected='selected'";}
+    echo "value='artificer'>Artificer</option>";
     echo "<option ";
     if($cl === "barbarian") {echo "selected='selected'";}
     echo "value='barbarian'>Barbarian</option>";
     echo "<option ";
+    if($cl === "bard") {echo "selected='selected'";}
+    echo "value='bard'>Bard</option>";
+    echo "<option ";
     if($cl === "cleric") {echo "selected='selected'";}
     echo "value='cleric'>Cleric</option>";
     echo "<option ";
-    if($cl === "mage") {echo "selected='selected'";}
-    echo "value='mage'>Mage</option>";
+    if($cl === "druid") {echo "selected='selected'";}
+    echo "value='druid'>Druid</option>";
+    echo "<option ";
+    if($cl === "fighter") {echo "selected='selected'";}
+    echo "value='fighter'>Fighter</option>";
+    if($cl === "monk") {echo "selected='selected'";}
+    echo "value='monk'>Monk</option>";
+    echo "<option ";
+    if($cl === "paladin") {echo "selected='selected'";}
+    echo "value='paladin'>Paladin</option>";
+    echo "<option ";
+    if($cl === "ranger") {echo "selected='selected'";}
+    echo "value='ranger'>Ranger</option>";
+    echo "<option ";
+    if($cl === "rogue") {echo "selected='selected'";}
+    echo "value='rogue'>Rogue</option>";
+    echo "<option ";
+    if($cl === "sorcerer") {echo "selected='selected'";}
+    echo "value='sorcerer'>Sorcerer</option>";
+    echo "<option ";
+    if($cl === "warlock") {echo "selected='selected'";}
+    echo "value='warlock'>Warlock</option>";
+    echo "<option ";
+    if($cl === "wizard") {echo "selected='selected'";}
+    echo "value='wizard'>Wizard</option>";
     echo <<<_END
             </select></td>
             <td>Level:</td>
@@ -816,14 +831,18 @@
                     <tr>
                       <th>Background:</td>
                       <td>$r1</td>
+                    </tr>
+                  </table>
+                  <table width="100%">
+                    <tr>
                       <th>Alignment:</td>
                       <td>$r2</td>
                       <th>Race:</td>
                       <td>$r3</td>
-                    </tr>
-                    <tr>
                       <th>Class:</td>
                       <td>$r4</td>
+                    </tr>
+                    <tr>
                       <th>Level:</td>
                       <td>$r5</td>
                       <th>XP Points:</td>
