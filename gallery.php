@@ -805,64 +805,64 @@
           <div class="homes">
           <form action='gallery.php' method='post'>
           <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
-            <table>
+            <table width="100%">
               <tr>
-                <td>
-                  <table id="stats">
+                <td id="stats">
+                  <table width="100%">
                     <tr>
-                      <td>Name:</td>
+                      <th>Name:</td>
                       <td>$r0</td>
                     </tr>
                     <tr>
-                      <td>Background:</td>
+                      <th>Background:</td>
                       <td>$r1</td>
-                      <td>Alignment:</td>
+                      <th>Alignment:</td>
                       <td>$r2</td>
-                      <td>Race:</td>
+                      <th>Race:</td>
                       <td>$r3</td>
                     </tr>
                     <tr>
-                      <td>Class:</td>
+                      <th>Class:</td>
                       <td>$r4</td>
-                      <td>Level:</td>
+                      <th>Level:</td>
                       <td>$r5</td>
-                      <td>XP Points:</td>
+                      <th>XP Points:</td>
                       <td>$r6</td>
                     </tr>
                     <tr>
-                      <td>Armor:</td>
+                      <th>Armor:</td>
                       <td>$r7</td>
-                      <td>Inspiration:</td>
+                      <th>Inspiration:</td>
                       <td>$r8</td>
                     </tr>
                     <tr>
-                      <td>Strength:</td>
+                      <th>Strength:</td>
                       <td>$r9</td>
-                      <td>Dexterity:</td>
+                      <th>Dexterity:</td>
                       <td>$r10</td>
                     </tr>
                     <tr>
-                      <td>Constitution:</td>
+                      <th>Constitution:</td>
                       <td>$r11</td>
-                      <td>Intelligence:</td>
+                      <th>Intelligence:</td>
                       <td>$r12</td>
                     </tr>
                     <tr>
-                      <td>Wisdom:</td>
+                      <th>Wisdom:</td>
                       <td>$r13</td>
-                      <td>Charisma:</td>
+                      <th>Charisma:</td>
                       <td>$r14</td>
                     </tr>
                     <tr>
-                      <td>Current HP:</td>
+                      <th>Current HP:</td>
                       <td>$r15</td>
-                      <td>Temporary HP:</td>
+                      <th>Temporary HP:</td>
                       <td>$r16</td>
                     </tr>
                     <tr>
-                      <td>Hit Dice:</td>
+                      <th>Hit Dice:</td>
                       <td>$r17</td>
-                      <td>Death Saves:</td>
+                      <th>Death Saves:</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -870,13 +870,13 @@
                     <tr>
                       <td></td>
                       <td></td>
-                      <td>Successes:</td>
+                      <th>Successes:</td>
                       <td>$r18</td>
-                      <td>Failures:</td>
+                      <th>Failures:</td>
                       <td>$r19</td>
                     </tr>
                     <tr>
-                      <td>Attack Spells:</td>
+                      <th>Attack Spells:</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -884,32 +884,32 @@
                       <td></td>
                     </tr>
                     <tr>
-                      <td>Name:</td>
+                      <th>ATK Name:</td>
                       <td>$r20</td>
-                      <td>ATK Bonus:</td>
+                      <th>ATK Bonus:</td>
                       <td>$r21</td>
-                      <td>Damage Type:</td>
+                      <th>Damage Type:</td>
                       <td>$r22</td>
                     </tr>
                     <tr>
-                      <td>Name:</td>
+                      <th>ATK Name:</td>
                       <td>$r23</td>
-                      <td>ATK Bonus:</td>
+                      <th>ATK Bonus:</td>
                       <td>$r24</td>
-                      <td>Damage Type:</td>
+                      <th>Damage Type:</td>
                       <td>$r25</td>
                     </tr>
                     <tr>
-                      <td>Name:</td>
+                      <th>ATK Name:</td>
                       <td>$r26</td>
-                      <td>ATK Bonus:</td>
+                      <th>ATK Bonus:</td>
                       <td>$r27</td>
-                      <td>Damage Type:</td>
+                      <th>Damage Type:</td>
                       <td>$r28</td>
                     </tr>
                     <tr>
                       <td></td>
-                      <td>Extra Attack Spells:</td>
+                      <th>Extra Attack Spells:</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -925,24 +925,24 @@
                     </tr>
                     <tr>
                       <td></td>
-                      <td>Finances:</td>
+                      <th>Finances:</td>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
                     </tr>
                     <tr>
-                      <td>Copper pieces:</td>
+                      <th>Copper pieces:</td>
                       <td>$r30</td>
-                      <td>Silver pieces:</td>
+                      <th>Silver pieces:</td>
                       <td>$r31</td>
-                      <td>Electrum Pieces:</td>
+                      <th>Electrum Pieces:</td>
                       <td>$r32</td>
                     </tr>
                     <tr>
-                      <td>Gold Pieces:</td>
+                      <th>Gold Pieces:</td>
                       <td>$r33</td>
-                      <td>Platinum Pieces:</td>
+                      <th>Platinum Pieces:</td>
                       <td>$r34</td>
                       <td></td>
                       <td></td>
@@ -951,46 +951,46 @@
                 </td>
               </tr>
               <tr>
-                <td>
-                  <table id="info">
+                <td id="info">
+                  <table width="100%">
                     <tr>
-                      <td>Equipment:</td>
+                      <th>Equipment:</td>
                     </tr>
                     <tr>
                       <td>$r35</td>
                     </tr>
                     <tr>
-                      <td>Other Proficieincies and Languages:</td>
+                      <th>Other Proficieincies and Languages:</td>
                     </tr>
                     <tr>
                       <td>$r36</td>
                     </tr>
                     <tr>
-                      <td>Personality Traits:</td>
+                      <th>Personality Traits:</td>
                     </tr>
                     <tr>
                       <td>$r37</td>
                     </tr>
                     <tr>
-                      <td>Ideals:</td>
+                      <th>Ideals:</td>
                     </tr>
                     <tr>
                       <td>$r38</td>
                     </tr>
                     <tr>
-                      <td>Bonds:</td>
+                      <th>Bonds:</td>
                     </tr>
                     <tr>
                       <td>$r39</td>
                     </tr>
                     <tr>
-                      <td>Flaws:</td>
+                      <th>Flaws:</td>
                     </tr>
                     <tr>
                       <td>$r40</td>
                     </tr>
                     <tr>
-                      <td>Features and Traits:</td>
+                      <th>Features and Traits:</td>
                     </tr>
                     <tr>
                       <td>$r41</td>
@@ -1004,7 +1004,7 @@
             <table>
               <tr>
                 <td>
-            Edit<input type='hidden' name='cname' value='$r0'>
+            <input type='hidden' name='cname' value='$r0'>Edit
                 </td>
               </tr>
             </table>
