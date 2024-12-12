@@ -827,7 +827,7 @@
       $result = $pdo->query($query);
       echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
     }
-    if ((isset($_POST['create-sheet']) && $_POST['create-sheet']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery']))) {
+    if (!isset($_POST['edit']) && ((isset($_POST['create-sheet']) && $_POST['create-sheet']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery'])))) {
       echo <<<_END
       <div class="creator">
         <form action="gallery.php" method="post" autocomplete="off">
