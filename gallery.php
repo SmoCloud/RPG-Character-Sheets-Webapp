@@ -74,24 +74,29 @@
     if($rc === "dwarf") {echo "selected='selected'";}
     echo "value='dwarf'>Dwarf</option>";
     echo "<option ";
-    if($rc === "druid") {echo "selected='selected'";}
-    echo "value='druid'>Druid</option>";
+    if($rc === "halfling") {echo "selected='selected'";}
+    echo "value='halfling'>Halfling</option>";
     echo "<option ";
     if($rc === "elf") {echo "selected='selected'";}
     echo "value='elf'>Elf</option>";
-    if($rc === "orc") {echo "selected='selected'";}
-    echo "value='orc'>Orc</option>";
+    echo "<option ";
+    if($rc === "aasimar") {echo "selected='selected'";}
+    echo "value='aasimar'>Aasimar</option>";
     echo "<option ";
     if($rc === "gnome") {echo "selected='selected'";}
     echo "value='gnome'>Gnome</option>";
     echo "<option ";
-    if($rc === "fairy") {echo "selected='selected'";}
-    echo "value='fairy'>Fairy</option>";
-    if($rc === "hobbit") {echo "selected='selected'";}
-    echo "value='hobbit'>Hobbit</option>";
+    if($rc === "dragonborn") {echo "selected='selected'";}
+    echo "value='dragonborn'>Dragonborn</option>";
     echo "<option ";
-    if($rc === "undead") {echo "selected='selected'";}
-    echo "value='undead'>Undead</option></select></td></tr>";
+    if($rc === "goliath") {echo "selected='selected'";}
+    echo "value='goliath'>Goliath</option>";
+    echo "<option ";
+    if($rc === "orc") {echo "selected='selected'";}
+    echo "value='orc'>Orc</option>";
+    echo "<option ";
+    if($rc === "tiefling") {echo "selected='selected'";}
+    echo "value='tiefling'>Tiefling</option></select></td></tr>";
 
     // Class update selector
     echo "<tr>
@@ -135,7 +140,7 @@
     echo <<<_END
             </select></td>
             <td>Level:</td>
-            <td><input type="range" id="level" name="level" min="1" max="10" value='$lvl'> <output id="value"></output></td>
+            <td><input type="range" id="level" name="level" min="1" max="20" value='$lvl'> <output id="value"></output></td>
             <td>XP points:</td>
             <td><input type="number" name="xp-points" value='$xpp'/></td>
           </tr>
