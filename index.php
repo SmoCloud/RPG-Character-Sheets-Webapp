@@ -47,7 +47,7 @@ try {
 <html lang='en'>
 
 <head>
-  <title>Basic RPG - Character Sheet Management - Version 5.3.3</title>
+  <title>Basic RPG - Character Sheet Management - Version 6.1.0</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -91,7 +91,7 @@ try {
             <br>
             <hr>
             <p>
-              Create a character sheet for Dungeons and Dragons - 5th Edition. This is a basic character sheet that only contains the core stats.
+              Create a character sheet for Dungeons and Dragons - 5th Edition using the stock alternative (and Adventurer's League) option. This is a basic character sheet that only contains the core stats.
               The optional character details and chracter spellcasting sheets are (currently) not available.
             </p>
           </td>

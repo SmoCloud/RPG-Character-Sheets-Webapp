@@ -22,14 +22,18 @@
       <div class="homes">
       <form action='gallery.php' method='post'>
       <pre>
-        <table>
+        <table width="100%">
           <tr>
             <td>Name:</td>
             <td><input type='text' name='cname' placeholder=$nm value=$nm></td>
           </tr>
           <tr>
             <td>Background:</td>
-            <td><input type='text' name='background' placeholder=$bg value=$bg></td>
+            <td><textarea name="background" rows="5" cols="100" style="width: 90%; height: auto;" value='$bg'></textarea></td>
+          </tr>
+        </table>
+        <table width="100%">
+          <tr>
             <td>Alignment:</td>
     _END;
     // Alignment update selector
@@ -227,29 +231,31 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><input type="text" name="aname1" value="$anm1" placeholder="$anm1"></td>
             <td></td>
             <td><input type="number" name="atk-bonus1" value='$abn1'></td>
             <td></td>
             <td><input type="text" name="dmg-type1" value='$dtp1'></td>
+            <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><input type="text" name="aname2" value="$anm2" placeholder="$anm2"></td>
             <td></td>
             <td><input type="number" name="atk-bonus2" value='$abn2'></td>
             <td></td>
             <td><input type="text" name="dmg-type2" value='$dtp2'></td>
+            <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><input type="text" name="aname3" value="$anm3" placeholder="$anm3"></td>
             <td></td>
             <td><input type="number" name="atk-bonus3" value='$abn3'></td>
             <td></td>
             <td><input type="text" name="dmg-type3" value='$dtp3'></td>
+            <td></td>
           </tr>
+        </table>
+        <table>
           <tr>
             <td></td>
             <td>Extra Attack Spells:</td>
@@ -259,13 +265,15 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="extra-atk-spells" rows="5" cols="100" style="width: 70%; height: auto;" value='$exs'></textarea></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
+        </table>
+        <table>
           <tr>
             <td></td>
             <td>Finances:</td>
@@ -290,6 +298,8 @@
             <td></td>
             <td></td>
           </tr>
+        </table>
+        <table>
           <tr>
             <td>Equipment:</td>
             <td></td>
@@ -299,8 +309,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="equipment" rows="5" cols="100" style="width: 90%; height: auto;" value='$eqp'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -315,8 +325,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="proficiencies" rows="5" cols="100" style="width: 90%; height: auto;" value='$opl'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -331,8 +341,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="personality-traits" rows="5" cols="100" style="width: 90%; height: auto;" value='$pst'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -347,8 +357,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="ideals" rows="5" cols="100" style="width: 90%; height: auto;" value='$idl'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -363,8 +373,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="bonds" rows="5" cols="100" style="width: 90%; height: auto;" value='$bnd'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -379,8 +389,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="flaws" rows="5" cols="100" style="width: 90%; height: auto;" value='$flw'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -395,8 +405,8 @@
             <td></td>
           </tr>
           <tr>
-            <td></td>
             <td><textarea name="features-traits" rows="5" cols="100" style="width: 90%; height: auto;" value='$fet'></textarea></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -481,49 +491,42 @@
       session_unset();
       $_SESSION['username'] = $username;
       $_SESSION['user_id'] = $user_id;
-      if (isset($_POST['cname']) &&
-        isset($_POST['background']) &&
-        isset($_POST['alignment']) &&
-        isset($_POST['race']) &&
-        isset($_POST['char-class']) && 
-        isset($_POST['level']) && 
-        isset($_POST['xp-points']) && 
-        isset($_POST['armor-type']) &&
-        isset($_POST['inspiration']) &&
-        isset($_POST['strength']) &&
-        isset($_POST['dexterity']) &&
-        isset($_POST['constitution']) &&
-        isset($_POST['intelligence']) &&
-        isset($_POST['wisdom']) &&
-        isset($_POST['charisma']) &&
-        isset($_POST['current-hp']) &&
-        isset($_POST['temp-hp']) &&
-        isset($_POST['hit-dice']) &&
-        isset($_POST['save-success']) &&
-        isset($_POST['save-fail']) &&
-        isset($_POST['aname1']) &&
-        isset($_POST['atk-bonus1']) &&
-        isset($_POST['dmg-type1']) &&
-        isset($_POST['aname2']) &&
-        isset($_POST['atk-bonus2']) &&
-        isset($_POST['dmg-type2']) &&
-        isset($_POST['aname3']) &&
-        isset($_POST['atk-bonus3']) &&
-        isset($_POST['dmg-type3']) &&
-        isset($_POST['extra-atk-spells']) &&
-        isset($_POST['cp']) &&
-        isset($_POST['sp']) &&
-        isset($_POST['ep']) &&
-        isset($_POST['gp']) &&
-        isset($_POST['pp']) &&
-        isset($_POST['equipment']) &&
-        isset($_POST['proficiencies']) &&
-        isset($_POST['personality-traits']) &&
-        isset($_POST['ideals']) &&
-        isset($_POST['bonds']) &&
-        isset($_POST['flaws']) &&
-        isset($_POST['features-traits']) &&
-        isset($_POST['edit-id'])) {
+      if (isset($_POST['edit-id']) && 
+      (isset($_POST['cname']) ||
+        isset($_POST['background']) ||
+        isset($_POST['alignment']) ||
+        isset($_POST['race']) ||
+        isset($_POST['char-class']) || 
+        isset($_POST['level']) || 
+        isset($_POST['xp-points']) || 
+        isset($_POST['armor-type']) ||
+        isset($_POST['inspiration']) ||
+        isset($_POST['strength']) ||
+        isset($_POST['dexterity']) ||
+        isset($_POST['constitution']) ||
+        isset($_POST['intelligence']) ||
+        isset($_POST['wisdom']) ||
+        isset($_POST['charisma']) ||
+        isset($_POST['current-hp']) ||
+        isset($_POST['temp-hp']) ||
+        isset($_POST['save-success']) ||
+        isset($_POST['save-fail']) ||
+        isset($_POST['aname1']) ||
+        isset($_POST['atk-bonus1']) ||
+        isset($_POST['dmg-type1']) ||
+        isset($_POST['extra-atk-spells']) ||
+        isset($_POST['cp']) ||
+        isset($_POST['sp']) ||
+        isset($_POST['ep']) ||
+        isset($_POST['gp']) ||
+        isset($_POST['pp']) ||
+        isset($_POST['equipment']) ||
+        isset($_POST['proficiencies']) ||
+        isset($_POST['personality-traits']) ||
+        isset($_POST['ideals']) ||
+        isset($_POST['bonds']) ||
+        isset($_POST['flaws']) ||
+        isset($_POST['features-traits']))) {
         $id           = $pdo->quote($_POST['edit-id']);
         $user_id      = $pdo->quote($_SESSION['user_id']);
         $cname        = $pdo->quote($_POST['cname']);
@@ -534,12 +537,13 @@
         $level        = $pdo->quote($_POST['level']);
         $xpp          = $pdo->quote($_POST['xp-points']);
         $armor        = $pdo->quote($_POST['armor-type']);
-        if ($_POST['inspiration'] === '') {
-          $_POST['inspiration'] = 0;
+        $inspire  = 0;
+        if (!isset($_POST['inspiration'])) {
+          $inspire = 0;
         } else {
-          $_POST['inspiration'] = 1;
+          $inspire = 1;
         }
-        $inspiration  = $pdo->quote($_POST['inspiration']);
+        $inspiration  = $pdo->quote($inspire);
         $strength     = $pdo->quote($_POST['strength']);
         $dexterity    = $pdo->quote($_POST['dexterity']);
         $constitution = $pdo->quote($_POST['constitution']);
@@ -548,7 +552,6 @@
         $charisma     = $pdo->quote($_POST['charisma']);
         $hpCurrent    = $pdo->quote($_POST['current-hp']);
         $hpTemp       = $pdo->quote($_POST['temp-hp']);
-        $hitDice      = $pdo->quote($_POST['hit-dice']);
         $saveSuccess  = $pdo->quote($_POST['save-success']);
         $saveFail     = $pdo->quote($_POST['save-fail']);
         $aname1       = $pdo->quote($_POST['aname1']);
@@ -588,7 +591,68 @@
         $bonds        = $pdo->quote($_POST['bonds']);
         $flaws        = $pdo->quote($_POST['flaws']);
         $fTraits      = $pdo->quote($_POST['features-traits']);
-        
+
+        // stats that are calculated from other input stats (not determined by player input, but as a byproduct of other stats and/or abilities)
+        $hDice = "";
+        $numSides = 0;
+
+        switch ($class):
+          case 'artificer':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'barbarian':
+            $hDice = "d12";
+            $numSides = 12;
+            break;
+          case 'bard':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'cleric':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'druid':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'fighter':
+            $hDice = "d10";
+            $numSides = 10;
+            break;
+          case 'monk':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'paladin':
+            $hDice = "d10";
+            $numSides = 10;
+            break;
+          case 'ranger':
+            $hDice = "d10";
+            $numSides = 10;
+            break;
+          case 'rogue':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'sorcerer':
+            $hDice = "d6";
+            $numSides = 6;
+            break;
+          case 'warlock':
+            $hDice = "d8";
+            $numSides = 8;
+            break;
+          case 'wizard':
+            $hDice = "d6";
+            $numSides = 6;
+            break;
+        endswitch;
+
+        $hitDice = $pdo->quote($hDice);
+
         $query        = "UPDATE char_sheets JOIN users ON char_sheets.uid = users.id JOIN games ON char_sheets.gid = games.id
                       SET cname=$cname, background=$background, alignment=$alignment, race=$race, class=$class, level=$level,
                       xp_points=$xpp, armor=$armor, inspiration=$inspiration, strength=$strength, dexterity=$dexterity, constitution=$constitution,
@@ -656,56 +720,64 @@
 
       
 
-        // stats that are calculated from other input stats (not determined by player input, but as a byproduct of other stats and/or abilities)
-        $strMod = (int)(($r9 - 10) / 2);
-        $dexMod = (int)(($r10 - 10) / 2);
-        $conMod = (int)(($r11 - 10) / 2);
-        $intMod = (int)(($r12 - 10) / 2);
-        $wisMod = (int)(($r13 - 10) / 2);
-        $chmMod = (int)(($r14 - 10) / 2);
+      // stats that are calculated from other input stats (not determined by player input, but as a byproduct of other stats and/or abilities)
+      $hitDice = "";
+      $numSides = 0;
 
-        $hitDice;
-
-        switch ($r4):
-          case 'artificer':
-            $hitDice = "d8";
-            break;
-          case 'barbarian':
-            $hitDice = "d12";
-            break;
-          case 'bard':
-            $hitDice = "d8";
-            break;
-          case 'cleric':
-            $hitDice = "d8";
-            break;
-          case 'druid':
-            $hitDice = "d8";
-            break;
-          case 'fighter':
-            $hitDice = "d10";
-            break;
-          case 'monk':
-            $hitDice = "d8";
-            break;
-          case 'paladin':
-            $hitDice = "d10";
-            break;
-          case 'ranger':
-            $hitDice = "d10";
-            break;
-          case 'rogue':
-            $hitDice = "d8";
-            break;
-          case 'sorcerer':
-            $hitDice = "d6";
-            break;
-          case 'warlock':
-            $hitDice = "d8";
-            break;
-          case 'wizard':
-            $hitDice = "d6";
-            break;
+      switch ($r4):
+        case 'artificer':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'barbarian':
+          $hitDice = "d12";
+          $numSides = 12;
+          break;
+        case 'bard':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'cleric':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'druid':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'fighter':
+          $hitDice = "d10";
+          $numSides = 10;
+          break;
+        case 'monk':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'paladin':
+          $hitDice = "d10";
+          $numSides = 10;
+          break;
+        case 'ranger':
+          $hitDice = "d10";
+          $numSides = 10;
+          break;
+        case 'rogue':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'sorcerer':
+          $hitDice = "d6";
+          $numSides = 6;
+          break;
+        case 'warlock':
+          $hitDice = "d8";
+          $numSides = 8;
+          break;
+        case 'wizard':
+          $hitDice = "d6";
+          $numSides = 6;
+          break;
+      endswitch;
 
       $pdf_data = [
         'ClassLevel' => $_POST['char-class'].' - '.$_POST['level'],
@@ -864,7 +936,7 @@
         $r41 = htmlspecialchars($row['f_traits']);
 
         if((isset($_SESSION['edit']) && isset($_POST['edit'])) && ($_SESSION['edit'] && $_POST['edit'] === $id)) { 
-          editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r21, $r22, $r23, $r24, $r25, $r26, $r27, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35, $r36, $r37, $r38, $r39, $r40, $r41);
+          editCharacter($id, $r0, $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r9, $r10, $r11, $r12, $r13, $r14, $r15, $r16, $r17, $r18, $r19, $r20, $r23, $r26, $r21, $r24, $r27, $r22, $r25, $r28, $r29, $r30, $r31, $r32, $r33, $r34, $r35, $r36, $r37, $r38, $r39, $r40, $r41);
         } else {
           echo <<<_END
           <div class="homes">
