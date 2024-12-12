@@ -98,9 +98,6 @@
             <td>Class:</td>
           <td><select name='char-class' value='$cl'>
       <option ";
-    if($cl === "artificer") {echo "selected='selected'";}
-    echo "value='artificer'>Artificer</option>";
-    echo "<option ";
     if($cl === "barbarian") {echo "selected='selected'";}
     echo "value='barbarian'>Barbarian</option>";
     echo "<option ";
@@ -201,22 +198,22 @@
           <tr>
             <td>Hit Dice:</td>
             <td>$hdc</td>
-            <td>Death Saves:</td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Death Saves:</td>
             <td>Successes:</td>
             <td><input type="range" id="level" name="save-success" min="0" max="3" value='$scc'/> <output id="value"></output></td>
             <td>Failures:</td>
             <td><input type="range" id="level" name="save-fail" min="0" max="3" value='$fal'/> <output id="value"></output></td>
+            <td></td>
           </tr>
           <tr>
-            <td></td>
             <td>Attack Spells:</td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -257,8 +254,8 @@
         </table>
         <table>
           <tr>
+            <td>Extra Attacks/Spells:</td>
             <td></td>
-            <td>Extra Attack Spells:</td>
             <td></td>
             <td></td>
             <td></td>
@@ -475,7 +472,7 @@
     <h2 class="hero-subtitle" style="text-align: center;"><?php echo $_SESSION['username']."'s Character Sheet Gallery";?></h2>
   </div>
   <?php
-    if (isset($_POST['delete']) && isset($_POST['cname'])) {
+    if (isset($_POST['del']) && isset($_POST['cname'])) {
       $username = $_SESSION['username'];
       $cname  = $pdo->quote($_POST['cname']);
       $query  = "DELETE char_sheets FROM char_sheets JOIN users ON char_sheets.uid=users.id JOIN games ON char_sheets.gid = games.id WHERE cname=$cname";
@@ -557,24 +554,18 @@
         $aname1       = $pdo->quote($_POST['aname1']);
         if (empty($_POST['atk-bonus1'])) {
           $_POST['atk-bonus1']  = 0;
-        } else {
-          $_POST['atk-bonus1']    = 1;
         }
         $atkBns1      = $pdo->quote($_POST['atk-bonus1']);
         $dmgType1     = $pdo->quote($_POST['dmg-type1']);
         $aname2       = $pdo->quote($_POST['aname2']);
         if (empty($_POST['atk-bonus2'])) {
           $_POST['atk-bonus2']    = 0;
-        } else {
-          $_POST['atk-bonus2']    = 1;
         }
         $atkBns2      = $pdo->quote($_POST['atk-bonus2']);
         $dmgType2     = $pdo->quote($_POST['dmg-type2']);
         $aname3       = $pdo->quote($_POST['aname3']);
         if (empty($_POST['atk-bonus3'])) {
           $_POST['atk-bonus3']    = 0;
-        } else {
-          $_POST['atk-bonus3']    = 1;
         }
         $atkBns3      = $pdo->quote($_POST['atk-bonus3']);
         $dmgType3     = $pdo->quote($_POST['dmg-type3']);
@@ -597,10 +588,6 @@
         $numSides = 0;
 
         switch ($class):
-          case 'artificer':
-            $hDice = "d8";
-            $numSides = 8;
-            break;
           case 'barbarian':
             $hDice = "d12";
             $numSides = 12;
@@ -667,12 +654,41 @@
       }
     }
     elseif (!isset($_POST['update']) && 
-      isset($_POST['cname'])   &&
-      isset($_POST['background']) &&
-      isset($_POST['alignment']) &&
-      isset($_POST['race']) &&
-      isset($_POST['char-class']) && 
-      isset($_POST['level'])) {
+      (isset($_POST['cname']) ||
+      isset($_POST['background']) ||
+      isset($_POST['alignment']) ||
+      isset($_POST['race']) ||
+      isset($_POST['char-class']) || 
+      isset($_POST['level']) || 
+      isset($_POST['xp-points']) || 
+      isset($_POST['armor-type']) ||
+      isset($_POST['inspiration']) ||
+      isset($_POST['strength']) ||
+      isset($_POST['dexterity']) ||
+      isset($_POST['constitution']) ||
+      isset($_POST['intelligence']) ||
+      isset($_POST['wisdom']) ||
+      isset($_POST['charisma']) ||
+      isset($_POST['current-hp']) ||
+      isset($_POST['temp-hp']) ||
+      isset($_POST['save-success']) ||
+      isset($_POST['save-fail']) ||
+      isset($_POST['aname1']) ||
+      isset($_POST['atk-bonus1']) ||
+      isset($_POST['dmg-type1']) ||
+      isset($_POST['extra-atk-spells']) ||
+      isset($_POST['cp']) ||
+      isset($_POST['sp']) ||
+      isset($_POST['ep']) ||
+      isset($_POST['gp']) ||
+      isset($_POST['pp']) ||
+      isset($_POST['equipment']) ||
+      isset($_POST['proficiencies']) ||
+      isset($_POST['personality-traits']) ||
+      isset($_POST['ideals']) ||
+      isset($_POST['bonds']) ||
+      isset($_POST['flaws']) ||
+      isset($_POST['features-traits']))) {
       $username         = $_SESSION['username'];
       $cname            = $pdo->quote($_POST['cname']);
       $user_id          = $pdo->quote($_SESSION['user_id']);
@@ -682,106 +698,117 @@
       $race             = $pdo->quote($_POST['race']);
       $class            = $pdo->quote($_POST['char-class']);
       $level            = $pdo->quote($_POST['level']);
-      $xpp          = $pdo->quote($_POST['xp-points']);
-      $armor       = $pdo->quote($_POST['armor-type']);
-      $inspiration  = $pdo->quote($_POST['inspiration']);
-      $strength     = $pdo->quote($_POST['strength']);
-      $dexterity    = $pdo->quote($_POST['dexterity']);
-      $constitution = $pdo->quote($_POST['constitution']);
-      $intelligence = $pdo->quote($_POST['intelligence']);
-      $wisdom       = $pdo->quote($_POST['wisdom']);
-      $charisma     = $pdo->quote($_POST['charisma']);
-      $hpCurrent    = $pdo->quote($_POST['current-hp']);
-      $hpTemp       = $pdo->quote($_POST['temp-hp']);
-      $saveSuccess  = $pdo->quote($_POST['save-success']);
-      $saveFail     = $pdo->quote($_POST['save-fail']);
-      $aname1       = $pdo->quote($_POST['aname1']);
-      $atkBns1      = $pdo->quote($_POST['atk-bonus1']);
-      $dmgType1     = $pdo->quote($_POST['dmg-type1']);
-      $aname2       = $pdo->quote($_POST['aname2']);
-      $atkBns2      = $pdo->quote($_POST['atk-bonus2']);
-      $dmgType2     = $pdo->quote($_POST['dmg-type2']);
-      $aname3       = $pdo->quote($_POST['aname3']);
-      $atkBns3      = $pdo->quote($_POST['atk-bonus3']);
-      $dmgType3     = $pdo->quote($_POST['dmg-type3']);
-      $extraSpells  = $pdo->quote($_POST['extra-atk-spells']);
-      $copper       = $pdo->quote($_POST['cp']);
-      $silver       = $pdo->quote($_POST['sp']);
-      $electrum     = $pdo->quote($_POST['ep']);
-      $gold         = $pdo->quote($_POST['gp']);
-      $platinum     = $pdo->quote($_PSOT['pp']);
-      $equipment    = $pdo->quote($_POST['equipment']);
-      $profLang     = $pdo->quote($_POST['proficiencies']);
-      $pTraits      = $pdo->quote($_POST['personality-traits']);
-      $ideals       = $pdo->quote($_POST['ideals']);
-      $bonds        = $pdo->quote($_POST['bonds']);
-      $flaws        = $pdo->quote($_POST['flaws']);
-      $fTraits      = $pdo->quote($_POST['features-traits']);
-
-      
+      $xpp              = $pdo->quote($_POST['xp-points']);
+      $armor            = $pdo->quote($_POST['armor-type']);
+      $inspire  = 0;
+      if (!isset($_POST['inspiration'])) {
+        $inspire = 0;
+      } else {
+        $inspire = 1;
+      }
+      $inspiration      = $pdo->quote($inspire);
+      $strength         = $pdo->quote($_POST['strength']);
+      $dexterity        = $pdo->quote($_POST['dexterity']);
+      $constitution     = $pdo->quote($_POST['constitution']);
+      $intelligence     = $pdo->quote($_POST['intelligence']);
+      $wisdom           = $pdo->quote($_POST['wisdom']);
+      $charisma         = $pdo->quote($_POST['charisma']);
+      $hpCurrent        = $pdo->quote($_POST['current-hp']);
+      $hpTemp           = $pdo->quote($_POST['temp-hp']);
+      $saveSuccess      = $pdo->quote($_POST['save-success']);
+      $saveFail         = $pdo->quote($_POST['save-fail']);
+      $aname1           = $pdo->quote($_POST['aname1']);
+      if (empty($_POST['atk-bonus1'])) {
+        $_POST['atk-bonus1']  = 0;
+      }
+      $atkBns1          = $pdo->quote($_POST['atk-bonus1']);
+      $dmgType1         = $pdo->quote($_POST['dmg-type1']);
+      $aname2           = $pdo->quote($_POST['aname2']);
+      if (empty($_POST['atk-bonus2'])) {
+        $_POST['atk-bonus2']    = 0;
+      }
+      $atkBns2          = $pdo->quote($_POST['atk-bonus2']);
+      $dmgType2         = $pdo->quote($_POST['dmg-type2']);
+      $aname3           = $pdo->quote($_POST['aname3']);
+      if (empty($_POST['atk-bonus3'])) {
+        $_POST['atk-bonus3']    = 0;
+      }
+      $atkBns3          = $pdo->quote($_POST['atk-bonus3']);
+      $dmgType3         = $pdo->quote($_POST['dmg-type3']);
+      $extraSpells      = $pdo->quote($_POST['extra-atk-spells']);
+      $copper           = $pdo->quote($_POST['cp']);
+      $silver           = $pdo->quote($_POST['sp']);
+      $electrum         = $pdo->quote($_POST['ep']);
+      $gold             = $pdo->quote($_POST['gp']);
+      $platinum         = $pdo->quote($_POST['pp']);
+      $equipment        = $pdo->quote($_POST['equipment']);
+      $profLang         = $pdo->quote($_POST['proficiencies']);
+      $pTraits          = $pdo->quote($_POST['personality-traits']);
+      $ideals           = $pdo->quote($_POST['ideals']);
+      $bonds            = $pdo->quote($_POST['bonds']);
+      $flaws            = $pdo->quote($_POST['flaws']);
+      $fTraits          = $pdo->quote($_POST['features-traits']);      
 
       // stats that are calculated from other input stats (not determined by player input, but as a byproduct of other stats and/or abilities)
-      $hitDice = "";
+      $hDice = "";
       $numSides = 0;
 
-      switch ($r4):
-        case 'artificer':
-          $hitDice = "d8";
-          $numSides = 8;
-          break;
+      switch ($class):
         case 'barbarian':
-          $hitDice = "d12";
+          $hDice = "d12";
           $numSides = 12;
           break;
         case 'bard':
-          $hitDice = "d8";
+          $hDice = "d8";
           $numSides = 8;
           break;
         case 'cleric':
-          $hitDice = "d8";
+          $hDice = "d8";
           $numSides = 8;
           break;
         case 'druid':
-          $hitDice = "d8";
+          $hDice = "d8";
           $numSides = 8;
           break;
         case 'fighter':
-          $hitDice = "d10";
+          $hDice = "d10";
           $numSides = 10;
           break;
         case 'monk':
-          $hitDice = "d8";
+          $hDice = "d8";
           $numSides = 8;
           break;
         case 'paladin':
-          $hitDice = "d10";
+          $hDice = "d10";
           $numSides = 10;
           break;
         case 'ranger':
-          $hitDice = "d10";
+          $hDice = "d10";
           $numSides = 10;
           break;
         case 'rogue':
-          $hitDice = "d8";
+          $hDice = "d8";
           $numSides = 8;
           break;
         case 'sorcerer':
-          $hitDice = "d6";
+          $hDice = "d6";
           $numSides = 6;
           break;
         case 'warlock':
-          $hitDice = "d8";
+          $hDice = "d8";
           $numSides = 8;
           break;
         case 'wizard':
-          $hitDice = "d6";
+          $hDice = "d6";
           $numSides = 6;
           break;
       endswitch;
 
+      $hitDice  = $pdo->quote($hDice);
+
       $pdf_data = [
         'ClassLevel' => $_POST['char-class'].' - '.$_POST['level'],
-        'PlayerName' => $usename,
+        'PlayerName' => $username,
         'CharacterName' => $_POST['cname'],
         'Race' => $_POST['race']
       ];
@@ -791,54 +818,57 @@
                         atk_name2, atk_bonus2, dmg_type2, atk_name3, atk_bonus3, dmg_type3, extra_atk_spells, cp, sp, ep, gp, pp, equipment, prof_lang, p_traits, 
                         ideals, bonds, flaws, f_traits) VALUES ($cname, $user_id, $game_id, $background, $alignment, $race, $class, $level, $xpp, $armor, $inspiration, 
                         $strength, $dexterity, $constitution, $intelligence, $wisdom, $charisma, $hpCurrent, $hpTemp, $hitDice, $saveSuccess, $saveFail, $aname1, $atkBns1, $dmgType1,
-                        $aname2, $atkBns2, $dmgType2, $aname3, $atkBns3, $dmgType3, $extraSpells, $cp, $sp, $ep, $gp, $pp, $equipment, $profLang, $pTraits, $ideals, $bonds, $flaws, $fTraits)";
+                        $aname2, $atkBns2, $dmgType2, $aname3, $atkBns3, $dmgType3, $extraSpells, $copper, $silver, $electrum, $gold, $platinum, $equipment, $profLang, $pTraits, $ideals, $bonds, $flaws, $fTraits)";
       $result = $pdo->query($query);
       echo "<h4>Character ".$cname." added to ".$username."'s Gallery.</h4>";
     }
     if ((isset($_POST['create-sheet']) && $_POST['create-sheet']) || (!isset($_POST['create-sheet']) && !isset($_POST['gallery']))) {
       echo <<<_END
-      <div class="container">
+      <div class="creator">
         <form action="gallery.php" method="post" autocomplete="off">
           <fieldset id="add">
             <legend>New Character Sheet</legend>
             <pre>
-      Name: <input type="text" name="cname" required>              Background: <input type="text" name="background" required>             Alignment: <select name="alignment"><option value="Lawful Good">Lawful Good</option><option value="Neutral Good">Neutral Good</option><option value="Chaotic Good">Chaotic Good</option><option value="Lawful Neutral">Lawful Neutral</option><option value="Neutral Neutral">Neutral Neutral</option><option value="Chaotic Neutral">Chaotic Neutral</option><option value="Lawful Evil">Lawful Evil</option><option value="Neutral Evil">Neutral Evil</option><option value="Chaotic Evil">Chaotic Evil</option></select>
+      Name: <input type="text" name="cname" required>
+      
+      Background:
+            <textarea name="background" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>                   
 
-      Race: <input type="radio" name="race" value="human" required>Human   <input type="radio" name="race" value="dwarf">Dwarf    <input type="radio" name="race" value="druid">Druid           Class:  <input type="radio" name="char-class" value="fighter" required>Fighter    <input type="radio" name="char-class" value="rogue">Rogue              Level: <input type="range" id="level" name="level" min="1" max="20"/> <output id="value"></output>
-            <input type="radio" name="race" value="elf">Elf     <input type="radio" name="race" value="orc">Orc      <input type="radio" name="race" value="gnome">Gnome                   <input type="radio" name="char-class" value="assassin">Assassin   <input type="radio" name="char-class" value="merchant">Merchant
-            <input type="radio" name="race" value="fairy">Fairy   <input type="radio" name="race" value="hobbit">Hobbit   <input type="radio" name="race" value="undead">Undead                  <input type="radio" name="char-class" value="ranger">Ranger     <input type="radio" name="char-class" value="barbarian">Barbarian
-                                                           <input type="radio" name="char-class" value="cleric">Cleric     <input type="radio" name="char-class" value="mage">Mage
+      Race: <input type="radio" name="race" value="human" required>Human        <input type="radio" name="race" value="dwarf">Dwarf     <input type="radio" name="race" value="halfling">Halfling              Class:  <input type="radio" name="char-class" value="barbarian" required>Barbarian    <input type="radio" name="char-class" value="Bard">Bard        <input type="radio" name="char-class" value="Cleric">Cleric              Alignment: <select name="alignment"><option value="Lawful Good">Lawful Good</option><option value="Neutral Good">Neutral Good</option><option value="Chaotic Good">Chaotic Good</option><option value="Lawful Neutral">Lawful Neutral</option><option value="Neutral Neutral">Neutral Neutral</option><option value="Chaotic Neutral">Chaotic Neutral</option><option value="Lawful Evil">Lawful Evil</option><option value="Neutral Evil">Neutral Evil</option><option value="Chaotic Evil">Chaotic Evil</option></select>
+            <input type="radio" name="race" value="elf">Elf          <input type="radio" name="race" value="aasimar">Aasimar   <input type="radio" name="race" value="gnome">Gnome                         <input type="radio" name="char-class" value="druid">Druid        <input type="radio" name="char-class" value="fighter">Fighter     <input type="radio" name="char-class" value="monk">Monk 
+            <input type="radio" name="race" value="dragonborn">Dragonborn   <input type="radio" name="race" value="goliath">Goliath   <input type="radio" name="race" value="orc">Orc                           <input type="radio" name="char-class" value="paladin">Paladin      <input type="radio" name="char-class" value="ranger">Ranger      <input type="radio" name="char-class" value="rogue">Rogue               Level: <input type="range" id="level" name="level" min="1" max="20"/> <output id="value"></output>
+            <input type="radio" name="race" value="tiefling">Tiefling                                                   <input type="radio" name="char-class" value="sorcerer">Sorcerer     <input type="radio" name="char-class" value="warlock">Warlock     <input type="radio" name="char-class" value="wizard">Wizard
 
-         XP Points: <input type="number" name="xp-points">                         Armor:  <select name="armor-type"><option value="padded">Padded</option><option value="leather">Leather</option><option value="studded">Studded Leather</option>           
+         XP Points: <input type="number" name="xp-points">                                  Armor:  <select name="armor-type"><option value="padded">Padded</option><option value="leather">Leather</option><option value="studded">Studded Leather</option>           
                                                                                       <option value="hide">Hide</option><option value="chain-shirt">Chain Shirt</option><option value="scale">Scale Mail</option><option value="breast">Breastplate</option>
                                                                                       <option value="half">Half Plate</option><option value="ring">Ring Mail</option><option value="chain-mail">Chain Mail</option>
                                                                                       <option value="splint">Splint</option><option value="plate">Plate</option>
-                                                                                      </select>                    Inspiration: <input type="checkbox" name="inspiration" value="1">
+                                                                                      </select>                       Inspiration: <input type="checkbox" name="inspiration" value="1">
 
-          Strength: <input type="number" name="strength">                     Dexterity: <input type="number" name="dexterity"> 
+          Strength: <input type="number" name="strength">                        Dexterity: <input type="number" name="dexterity"> 
 
-      Constitution: <input type="number" name="constitution">                  Intelligence: <input type="number" name="intelligence">
+      Constitution: <input type="number" name="constitution">                     Intelligence: <input type="number" name="intelligence">
 
-            Wisdom: <input type="number" name="wisdom">                      Charisma: <input type="number" name="charisma">
+            Wisdom: <input type="number" name="wisdom">                         Charisma: <input type="number" name="charisma">
 
-        Current HP: <input type="number" name="current-hp">                  Temporary HP: <input type="number" name="temp-hp">
+        Current HP: <input type="number" name="current-hp">                     Temporary HP: <input type="number" name="temp-hp">
 
        Death Saves:        Successes: <input type="range" id="level" name="save-success" min="0" max="3"/> <output id="value"></output>                       Failures: <input type="range" id="level" name="save-fail" min="0" max="3"/> <output id="value"></output>
 
       Attacks & Spells:
-                  Name                                  ATK Bonus                        Damage Type
-          <input type="text" name="aname1">                    <input type="number" name="atk-bonus1">                <input type="text" name="dmg-type1">
-          <input type="text" name="aname2">                    <input type="number" name="atk-bonus2">                <input type="text" name="dmg-type2">
-          <input type="text" name="aname3">                    <input type="number" name="atk-bonus3">                <input type="text" name="dmg-type3">
+                    Name                                                ATK Bonus                                     Damage Type
+          <input type="text" name="aname1">                         <input type="number" name="atk-bonus1">                     <input type="text" name="dmg-type1">
+          <input type="text" name="aname2">                         <input type="number" name="atk-bonus2">                     <input type="text" name="dmg-type2">
+          <input type="text" name="aname3">                         <input type="number" name="atk-bonus3">                     <input type="text" name="dmg-type3">
       
-      Extra Spells:
-                     <textarea name="extra-atk-spells" rows="5" cols="100" style="width: 70%; height: auto;"></textarea>
+      Extra Attacks/Spells:
+            <textarea name="extra-atk-spells" rows="5" cols="100" style="width: 90%; height: auto;"></textarea>
 
       Finances:
 
-              Copper Pieces: <input type="number" name="cp">            Silver Pieces: <input type="number" name="sp">            Electrum Pieces: <input type="number" name="ep">
+          Copper Pieces: <input type="number" name="cp">                  Silver Pieces: <input type="number" name="sp">                Electrum Pieces: <input type="number" name="ep">
 
-                Gold Pieces: <input type="number" name="gp">          Platinum Pieces: <input type="number" name="pp">
+            Gold Pieces: <input type="number" name="gp">                Platinum Pieces: <input type="number" name="pp">
     
       Equipment:
             
@@ -941,7 +971,7 @@
           echo <<<_END
           <div class="homes">
           <form action='gallery.php' method='post'>
-          <button id='delete-btn' type='submit' name='delete' value=$id onclick="return confirm('Are you sure you want to delete $r0?')">
+          <button id='gen-pdf-btn' type='submit' name='gen-pdf' value=$id>
             <table width="100%">
               <tr>
                 <td id="stats">
@@ -1050,7 +1080,7 @@
                     </tr>
                     <tr>
                       <td></td>
-                      <th>Extra Attack Spells:</td>
+                      <th>Extra Attacks/Spells:</td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -1141,15 +1171,32 @@
               </tr>
             </table>
           </button>
-          <button id='edit-btn' type='submit' name='edit' value='$id'">
-            <table>
-              <tr>
-                <td>
-            <input type='hidden' name='cname' value='$r0'>Edit
-                </td>
-              </tr>
-            </table>
-          </button>
+          <table width="100%">
+            <tr>
+              <td>
+                <button id='edit-btn' type='submit' name='edit' value='$id'>
+                  <table width="50%">
+                    <tr>
+                      <td>
+                  <input type='hidden' name='cname' value='$r0'>Edit
+                      </td>
+                    </tr>
+                  </table>
+                </button>
+              </td>
+              <td>
+                <button id='del-btn' type='submit' name='del' value='$id' onclick="return confirm('Are you sure you want to delete $r0?')">
+                  <table width="50%">
+                    <tr>
+                      <td>
+                  <input type='hidden' name='cname' value='$r0'>Delete
+                      </td>
+                    </tr>
+                  </table>
+                </button>
+              </td>
+            </tr>
+          </table>
           </form>
           </div>
           _END;
